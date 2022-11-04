@@ -88,17 +88,30 @@ if (!gwoSetupLoaded) {
             model.gwoStartingCards = [];
           }
           model.gwoStartingCards.push(
-            { id: "gwc_start_vehicle" },
-            { id: "gwc_start_air" },
-            { id: "gwc_start_orbital" },
-            { id: "gwc_start_bot" }
-          );
-          var lockedBaseCards = [
+            { id: "gwc_start_lilly" },
             { id: "gwc_start_artillery" },
             { id: "gwc_start_subcdr" },
             { id: "gwc_start_combatcdr" },
             { id: "gwc_start_allfactory" },
             { id: "gwc_start_storage" },
+            { id: "gwc_start_vehicle" },
+            { id: "gwc_start_air" },
+            { id: "gwc_start_orbital" },
+            { id: "gwc_start_bot" },
+            { id: "gwaio_start_ceo" },
+            { id: "gwaio_start_paratrooper" },
+            { id: "gwaio_start_tourist" },
+            { id: "gwaio_start_rapid" },
+            { id: "gwaio_start_nomad" },
+            { id: "gwaio_start_backpacker" },
+            { id: "gwaio_start_hoarder" },
+          );
+          var lockedBaseCards = [
+            //{ id: "gwc_start_artillery" },
+            //{ id: "gwc_start_subcdr" },
+            //{ id: "gwc_start_combatcdr" },
+            //{ id: "gwc_start_allfactory" },
+            //{ id: "gwc_start_storage" },
           ];
           var allCards = model.gwoStartingCards.concat(
             lockedBaseCards,
