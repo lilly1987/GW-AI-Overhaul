@@ -50,7 +50,7 @@ if (!gwoUILoaded) {
         bountyModeValue: koNumeric(0, 1),
         factionTechHandicap: koNumeric(0, 1),
         alliedCommanderChance: koNumeric(0, 0),
-        personalityTags: ko.observableArray(),
+        personalityTags: ko.observableArray(["Default", "Queller"]),
       };
 
       var difficultySettings = model.gwoDifficultySettings;

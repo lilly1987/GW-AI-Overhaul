@@ -214,14 +214,16 @@ if (!gwoSetupLoaded) {
             }
           };
 
-          var titansAITags = ["Default", "GalacticWar"];
+          var getTitansAITags = function () {
+            return ["Default", "GalacticWar"];
+          };
 
           var setupPenchantAI = function (ai) {
             var penchantValues = gwoAI.penchants();
             ai.personality.personality_tags =
               ai.personality.personality_tags.concat(
                 penchantValues.penchants,
-                titansAITags
+                getTitansAITags()
               );
             ai.penchantName = penchantValues.penchantName;
           };
@@ -274,13 +276,13 @@ if (!gwoSetupLoaded) {
                 break;
               case "Titans":
                 ai.personality.personality_tags =
-                  ai.personality.personality_tags.concat(titansAITags);
+                  ai.personality.personality_tags.concat(getTitansAITags());
             }
           };
 
-          var selectAIBuffs = function (numberOfBuffs) {
+          var selectAIBuffs = function (numberBuffs) {
             var buffType = [0, 1, 2, 3, 4, 6]; // 0 = cost; 1 = damage; 2 = health; 3 = speed; 4 = build; 6 = combat
-            return _.sample(buffType, numberOfBuffs);
+            return _.sample(buffType, numberBuffs);
           };
 
           var setupAIBuffs = function (distance, buffDistanceDelay) {
