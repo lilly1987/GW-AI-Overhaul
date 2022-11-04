@@ -104,7 +104,7 @@ if (!gwoSetupLoaded) {
             { id: "gwaio_start_rapid" },
             { id: "gwaio_start_nomad" },
             { id: "gwaio_start_backpacker" },
-            { id: "gwaio_start_hoarder" },
+            { id: "gwaio_start_hoarder" }
           );
           var lockedBaseCards = [
             //{ id: "gwc_start_artillery" },
