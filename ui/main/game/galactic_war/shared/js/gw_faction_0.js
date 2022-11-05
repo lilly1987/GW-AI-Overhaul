@@ -21,7 +21,7 @@ define(function () {
       metal_demand_check: 0.71,
       energy_demand_check: 0.8,
       micro_type: 0,
-      go_for_the_kill: false,
+      go_for_the_kill: true,
       neural_data_mod: 1,
       personality_tags: ["Default", "GWAlly", "SlowerExpansion", "queller"],
       adv_eco_mod: 1,
