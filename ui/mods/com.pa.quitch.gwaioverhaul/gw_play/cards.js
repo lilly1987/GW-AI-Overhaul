@@ -20,7 +20,7 @@ if (!gwoCardsLoaded) {
           "gwaio_upgrade_fabricationvehicle",
         ];
 
-        var numCardsToOffer = 3;
+        var numCardsToOffer = 4;
 
         model.rerollTech = function () {
           var cardsOffered = 0;
@@ -30,7 +30,7 @@ if (!gwoCardsLoaded) {
             cardsOffered = numCardsToOffer;
           }
           var star = game.galaxy().stars()[game.currentStar()];
-          model.gwoRerollsUsed(model.gwoRerollsUsed() + 1);
+          //model.gwoRerollsUsed(model.gwoRerollsUsed() + 1);
           if (model.gwoRerollsUsed() >= cardsOffered - 1) {
             model.gwoOfferRerolls(false);
           }
