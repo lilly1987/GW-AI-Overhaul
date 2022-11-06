@@ -228,12 +228,21 @@ define([], function()
                 eval: function(attribute, value) { return new Function('attribute', value)(attribute); },
                 clone: function(attribute, value)
                 {
+		console.log('lilly.clone : '+ attribute);
+		console.log('lilly.clone : '+ value);
+		console.log('lilly.clone : '+ specTag);
                     var loaded = load(attribute);
                     if (loaded)
                         loaded = _.cloneDeep(loaded);
                     specs[value + specTag] = loaded || attribute;
                 },
-                tag: function(attribute, value) { return attribute + specTag; },
+                tag: function(attribute, value) { 
+		console.log('lilly.clone : '+ attribute);
+		console.log('lilly.clone : '+ value);
+		console.log('lilly.clone : '+ specTag);
+
+                return attribute + specTag; 
+                },
                 pull: function(attribute, value)
                 {
                     if (!_.isArray(attribute))

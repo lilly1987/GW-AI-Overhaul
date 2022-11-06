@@ -50,6 +50,7 @@ define([
         },
         buff: function(inventory, context)
         {
+			//console.log("params p : "+_.pairs(params)); 
             if (inventory.lookupCard(CARD) === 0)
             {
                 // Make sure we only do the start buff/dull once
@@ -323,45 +324,62 @@ max_advanced_fabbers
                         //    file: item,
 						//	path: "tools.0.spec_id",
 						//	op: "replace",
-						//	value: gwoUnit.commander_build_arm_lilly ,
-						//	//value: "/pa/tools/commander_build_arm/commander_build_arm_lilly.json"
+						//	//value: gwoUnit.commander_build_arm_lilly ,
+						//	value: "/pa/tools/commander_build_arm/commander_build_arm_lilly.json"
 						//	//value: "/pa/tools/commander_build_arm/commander_build_arm.json"
                         //});
-						
+                        //mods.push(
+                        //{
+						//	file: item,
+						//	path: 'tools.0.spec_id',
+						//	op: 'tag',
+						//	//value: ''
+                        //});
                     };
                     _.forEach(units, modUnit);
 					
 					var modUnit = function(unit) {
-						var newBuildArm = unit + '.build_arm.lilly.' + (inventory.mods().length + mods.length).toString();
-						console.error('modUnit : '+ newBuildArm);
-						mods = mods.concat([{
+						//var newBuildArm = newBuildArm = unit + '.player' + '.build_arm.' + (inventory.mods().length + mods.length).toString();
+						var newBuildArm = newBuildArm = unit + '.player' + '.build_arm.' + (inventory.mods().length + mods.length).toString();
+						console.log('modUnit : '+ newBuildArm);
+                        mods.push(
+                        {
 							file: unit,
 							path: 'tools.0.spec_id',
 							op: 'clone',
 							value: newBuildArm
-						}, {
+                        });
+                        mods.push(
+                        {
 							file: newBuildArm,
 							path: 'construction_demand.energy',
 							op: 'multiply',
 							value: 1000
-						}, {
+                        });
+                        mods.push(
+                        {
 							file: newBuildArm,
 							path: 'construction_demand.metal',
 							op: 'multiply',
 							value: 1000
-						}, {
+                        });
+                        mods.push(
+                        {
 							file: unit,
 							path: 'tools.0.spec_id',
 							op: 'replace',
 							value: newBuildArm
-						}, {
+                        });
+                        mods.push(
+                        {
 							file: unit,
 							path: 'tools.0.spec_id',
 							op: 'tag',
-							value: ''
-						}]);
+							value: newBuildArm
+                        });
+					};
 					_.forEach(units, modUnit);
-					
+					/**/
 					$.getJSON("coui://pa/tools/commander_build_arm/commander_build_arm_lilly.json").done(function (text) {						
 						console.log("getJSON commander_build_arm_lilly : "+_.pairs(text)); 
 	                }).fail(function () {

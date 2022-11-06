@@ -103,7 +103,7 @@ define([
       var item;
       var pending = 0;
       var fetch = function (filePath) {
-		console.log("filePath"+filePath);
+		console.log("lilly.filePath : "+filePath);
         $.ajax({
           url: "coui:/" + filePath,
           success: function (data) {
@@ -125,7 +125,7 @@ define([
               error
             );
 			$.getJSON("coui:/"+ filePath).done(function (text) {
-				console.log("getJSON spec : "+_.pairs(text)); 
+				console.log("lilly.getJSON spec : "+_.pairs(text)); 
 				try {
 				  data = JSON.parse(data);
 				} catch (e) {
@@ -135,7 +135,7 @@ define([
 				work = work.concat(newWork);
 				results[filePath + tag] = data;
 			}).fail(function () {
-				console.error('getJSON spec fail');
+				console.error('lilly.getJSON spec fail');
 			});
           },
           complete: function () {
@@ -228,6 +228,9 @@ define([
         return new Function("attribute", value)(attribute);
       },
       clone: function (attribute, value) {
+		console.log('lilly.clone : '+ attribute);
+		console.log('lilly.clone : '+ value);
+		console.log('lilly.clone : '+ specTag);
         var loaded = load(attribute);
         if (loaded) {
           loaded = _.cloneDeep(loaded);
@@ -238,10 +241,18 @@ define([
         // hack fix for mirrorMode due to the fact that
         // `attribute` was retaining the previous `specTag`s
         // and I couldn't track down why
-        var cleanAttribute = attribute.slice(
-          0,
-          attribute.lastIndexOf(".json") + 5
-        );
+		console.log('lilly.tag : '+ attribute);
+		console.log('lilly.tag : '+ specTag);
+		var cleanAttribute=attribute;
+		//try {
+		//	cleanAttribute = attribute.slice(
+		//	  0,
+		//	  attribute.lastIndexOf(".json") + 5
+		//	);
+		//} catch (e) {
+		//  // empty
+		//}
+		console.log('lilly.tag : '+ cleanAttribute + specTag);
         return cleanAttribute + specTag;
       },
       pull: function (attribute, value) {
