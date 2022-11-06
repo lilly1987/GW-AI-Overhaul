@@ -16,7 +16,7 @@ define([
         visible: function(params) { return false; },
         summarize: function(params)
         {
-            return '!LOC:lilly Commander';
+            return '!LOC:lilly Commander2';
         },
         icon: function(params)
         {
@@ -56,61 +56,36 @@ define([
                 var buffCount = inventory.getTag('', 'buffCount', 0);
                 if (!buffCount) {
                     GWCStart.buff(inventory);
-                    inventory.maxCards(inventory.maxCards() + 8);
-                    inventory.addUnits(
-                    [
-                        '/pa/units/land/vehicle_factory/vehicle_factory.json',
-                        '/pa/units/land/tank_light_laser/tank_light_laser.json'
-                    ]);
-                    _.forEach(context.minions, function(minion)
-                    {
-                        inventory.minions.push(minion);
-                    });
-                    var minionSpecs = _.filter(_.pluck(context.minions, 'commander'));
-                    inventory.addUnits(minionSpecs);
-					//
-					/*
-                    var mods = [];
-                    var modUnit = function(unit)
-                    {
-                        mods.push(
-                        {
-                            file: unit,
-                            path: 'navigation.move_speed',
-                            op: 'multiply',
-                            value: 10.0
-                        });
-                        mods.push(
-                        {
-                            file: unit,
-                            path: 'navigation.brake',
-                            op: 'multiply',
-                            value: 10.0
-                        });
-                        mods.push(
-                        {
-                            file: unit,
-                            path: 'navigation.acceleration',
-                            op: 'multiply',
-                            value: 10.0
-                        });
-                        mods.push(
-                        {
-                            file: unit,
-                            path: 'navigation.turn_speed',
-                            op: 'multiply',
-                            value: 10.0
-                        });
-                        mods.push(
-                        {
-                            file: unit,
-                            path: 'max_health',
-                            op: 'multiply',
-                            value: 10.0
-                        });
-                    };
-                    _.forEach(units, modUnit);*/
-					//
+					//----------------------------------------------------------
+					loadScript("coui://ui/mods/com.pa.legion-expansion/common.js");
+					console.log("loadScript : "+legion.commanders); 
+					inventory.setTag('global', 'commander', _.sample(legion.commanders)); //건물 못지음
+					//----------------------------------------------------------
+					var commander = inventory.getTag('global', 'commander');
+					console.log('commander :' + commander);
+					console.log('commander t :' + typeof commander);
+					//----------------------------------------------------------
+					$.getJSON("coui://pa/units/unit_list_legion.json").done(function (text) {
+						//console.log("getJSON : "+_.pairs(text)); 
+						//console.log("getJSON : "+text.units); 
+						inventory.addUnits(text.units);
+	                }).fail(function () {
+						console.error('getJSON fail1');
+					});//----------------------------------------------------------
+					$.getJSON("coui://pa/units/unit_list.json").done(function (text) {
+						//console.log("getJSON : "+_.pairs(text)); 
+						//console.log("getJSON : "+text.units); 
+						inventory.addUnits(text.units);
+	                }).fail(function () {
+						console.error('getJSON fail2');
+					});
+					
+					//----------------------------------------------------------
+                }
+                else
+                {
+                    // Don't clog up a slot.
+                    inventory.maxCards(inventory.maxCards() + 1);
                 }
                 ++buffCount;
                 inventory.setTag('', 'buffCount', buffCount);

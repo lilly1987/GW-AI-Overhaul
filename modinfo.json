@@ -50,5 +50,8 @@
   "priority": 200,
   "titansOnly": true,
   "enabled": true,
-  "github": "https://github.com/lilly1987/GW-AI-Overhaul"
+  "github": "https://github.com/lilly1987/Planetary-Annihilation-Lilly-Mod/",
+  "dependencies": [
+   
+  ]
 }
