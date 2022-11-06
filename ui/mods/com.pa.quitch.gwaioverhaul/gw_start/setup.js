@@ -425,10 +425,10 @@ if (!gwoSetupLoaded) {
               difficultyIndex: selectedDifficulty,
               systemTemplates: systemTemplates,
               content: game.content(),
-              minStarDistance: 2,
-              maxStarDistance: 4,
-              maxConnections: 4,
-              minimumDistanceBonus: 8,
+              minStarDistance: 4,
+              maxStarDistance: 8,
+              maxConnections: 8,
+              minimumDistanceBonus: 4,
             });
 
             var dealStartCard = buildGalaxy.then(function (galaxy) {
@@ -477,9 +477,9 @@ if (!gwoSetupLoaded) {
                 };
               });
 
-              var neutralStars = 2;
+              var neutralStars = 4;
               if (model.gwoDifficultySettings.easierStart()) {
-                neutralStars = 4;
+                neutralStars = 8;
               }
 
               return GWBreeder.populate({
