@@ -88,6 +88,7 @@ if (!gwoSetupLoaded) {
             model.gwoStartingCards = [];
           }
           model.gwoStartingCards.push(
+            { id: "gwc_start_legion" },
             { id: "gwc_start_lilly2" },
             { id: "gwc_start_lilly" },
             { id: "gwc_start_artillery" },

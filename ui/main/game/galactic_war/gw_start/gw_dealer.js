@@ -98,6 +98,7 @@ define([
     ];
 
     var extraDeck = [
+        'gwc_start_legion',
         'gwc_start_lilly2',
         'gwc_start_lilly',
         'gwc_start_vehicle',

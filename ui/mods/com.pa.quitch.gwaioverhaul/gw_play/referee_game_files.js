@@ -103,6 +103,7 @@ define([
       var item;
       var pending = 0;
       var fetch = function (filePath) {
+		console.log("filePath"+filePath);
         $.ajax({
           url: "coui:/" + filePath,
           success: function (data) {
@@ -123,6 +124,19 @@ define([
               status,
               error
             );
+			$.getJSON("coui:/"+ filePath).done(function (text) {
+				console.log("getJSON spec : "+_.pairs(text)); 
+				try {
+				  data = JSON.parse(data);
+				} catch (e) {
+				  // empty
+				}
+				var newWork = tagSpec(tag, data);
+				work = work.concat(newWork);
+				results[filePath + tag] = data;
+			}).fail(function () {
+				console.error('getJSON spec fail');
+			});
           },
           complete: function () {
             --pending;

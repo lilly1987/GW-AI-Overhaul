@@ -328,6 +328,11 @@ max_advanced_fabbers
                         });
                     };
                     _.forEach(units, modUnit);
+					$.getJSON("coui://pa/tools/commander_build_arm/commander_build_arm_lilly.json").done(function (text) {						
+						console.log("getJSON commander_build_arm_lilly : "+_.pairs(text)); 
+	                }).fail(function () {
+						console.error('getJSON fail commander_build_arm_lilly');
+					});
 					//----------------------------------------------------------
                     var weaps =
                     [

@@ -43,6 +43,7 @@ var colorTable = [
 
 // These are the start cards.
 var startCards = [
+    { id: 'gwc_start_legion' },
     { id: 'gwc_start_lilly2' },
     { id: 'gwc_start_lilly' },
     { id: 'gwc_start_vehicle' },

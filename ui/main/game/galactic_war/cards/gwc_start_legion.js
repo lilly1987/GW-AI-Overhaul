@@ -16,7 +16,7 @@ define([
         visible: function(params) { return false; },
         summarize: function(params)
         {
-            return '!LOC:lilly Commander2';
+            return '!LOC:lilly legion';
         },
         icon: function(params)
         {
