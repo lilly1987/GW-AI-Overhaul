@@ -318,16 +318,50 @@ max_advanced_fabbers
                             op: 'multiply',
                             value: n25
                         });
-                        mods.push(
-                        {
-                            file: item,
-							path: "tools.0.spec_id",
-							op: "replace",
-							value: "/pa/tools/commander_build_arm/commander_build_arm_lilly.json"
-							//value: "/pa/tools/commander_build_arm/commander_build_arm.json"
-                        });
+                        //mods.push(
+                        //{
+                        //    file: item,
+						//	path: "tools.0.spec_id",
+						//	op: "replace",
+						//	value: gwoUnit.commander_build_arm_lilly ,
+						//	//value: "/pa/tools/commander_build_arm/commander_build_arm_lilly.json"
+						//	//value: "/pa/tools/commander_build_arm/commander_build_arm.json"
+                        //});
+						
                     };
                     _.forEach(units, modUnit);
+					
+					var modUnit = function(unit) {
+						var newBuildArm = unit + '.build_arm.lilly.' + (inventory.mods().length + mods.length).toString();
+						console.error('modUnit : '+ newBuildArm);
+						mods = mods.concat([{
+							file: unit,
+							path: 'tools.0.spec_id',
+							op: 'clone',
+							value: newBuildArm
+						}, {
+							file: newBuildArm,
+							path: 'construction_demand.energy',
+							op: 'multiply',
+							value: 1000
+						}, {
+							file: newBuildArm,
+							path: 'construction_demand.metal',
+							op: 'multiply',
+							value: 1000
+						}, {
+							file: unit,
+							path: 'tools.0.spec_id',
+							op: 'replace',
+							value: newBuildArm
+						}, {
+							file: unit,
+							path: 'tools.0.spec_id',
+							op: 'tag',
+							value: ''
+						}]);
+					_.forEach(units, modUnit);
+					
 					$.getJSON("coui://pa/tools/commander_build_arm/commander_build_arm_lilly.json").done(function (text) {						
 						console.log("getJSON commander_build_arm_lilly : "+_.pairs(text)); 
 	                }).fail(function () {
