@@ -75,7 +75,7 @@ define([
                         inventory.minions.push(minion);
                     });
                     var minionSpecs = _.filter(_.pluck(context.minions, 'commander'));
-					console.log('minionSpecs :' + minionSpecs);
+					//console.log('lilly.minionSpecs :' + minionSpecs);
                     inventory.addUnits(minionSpecs);
 					//----------------------------------------------------------
                     var mods = [];
@@ -114,12 +114,14 @@ define([
                     };
                     _.forEach(commanders, modUnit);
 					//----------------------------------------------------------
+                    var commander = inventory.getTag('global', 'commander');
                     var commanders =
                     [
-						commander,
+						commander
                     ];
                     var modUnit = function(item)
                     {
+                        modspush(item ,'navigation.move_speed','multiply',n1);
                         modspush(item ,'navigation.turn_speed','multiply',n1);
                         modspush(item ,'max_health','multiply',n1);
                         modspush(item ,'production.energy','multiply',n1);
@@ -127,7 +129,7 @@ define([
                         modspush(item ,'storage.energy','multiply',n1);
                         modspush(item ,'storage.metal','multiply',n1);
                         //----------------------------------------------------------
-                        var newBuildArm = unit + '.player.' + (inventory.mods().length + mods.length).toString();
+                        var newBuildArm = item + '.player.' + (inventory.mods().length + mods.length).toString();
                         modspush(item ,'tools.0.spec_id','clone',newBuildArm);
                         modspush(newBuildArm ,'construction_demand.energy','multiply',1000);
                         modspush(newBuildArm ,'construction_demand.metal','multiply',1000);
@@ -136,25 +138,27 @@ define([
                         modspush(newBuildArm ,'yaw_range','multiply',2);
                         modspush(newBuildArm ,'pitch_range','multiply',4);
                         modspush(newBuildArm ,'max_range','multiply',1000);
-                        modspush(newBuildArm ,'assist_layers','multiply',"WL_Orbital");
+                        modspush(newBuildArm ,'assist_layers','push',"WL_Orbital");
                         modspush(item ,'tools.0.spec_id','replace',newBuildArm);
                         modspush(item ,'tools.0.spec_id','tag',' ');
                         //----------------------------------------------------------
                         // /pa/units/commanders/base_commander/base_commander_tool_aa_weapon.json
-                        var newwp = unit + '.player.' + (inventory.mods().length + mods.length).toString();
+                        var newwp = item + '.player.' + (inventory.mods().length + mods.length).toString();
                         modspush(item ,'tools.3.spec_id','clone',newwp);
                         modspush(item ,'tools.3.spec_id','replace',newwp);
                         modspush(item ,'tools.3.spec_id','tag',' ');
 
                         modspush(newwp ,'target_layers','push',[
+                            "WL_Orbital",
                             "WL_LandHorizontal",
-                            "WL_Seafloor"
+                            "WL_Seafloor",
+                            "WL_WaterSurface"
                         ]);
-                        modspush(newwp ,'target_priorities','push',[
+                        /*modspush(newwp ,'target_priorities','push',[
                             "Mobile - Air",
                             "Mobile",
                             "Structure - Wall"
-                        ]);
+                        ]);*/
 
                         // /pa/units/commanders/base_commander/base_commander_aa_ammo.json
                         var newamm = newwp + '.player.' + (inventory.mods().length + mods.length).toString();
