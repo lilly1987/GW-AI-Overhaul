@@ -127,7 +127,7 @@ define([
                         modspush(item ,'storage.energy','multiply',n1);
                         modspush(item ,'storage.metal','multiply',n1);
                         //----------------------------------------------------------
-                        var newBuildArm = unit + '.player' + '.build_arm.' + (inventory.mods().length + mods.length).toString();
+                        var newBuildArm = unit + '.player.' + (inventory.mods().length + mods.length).toString();
                         modspush(item ,'tools.0.spec_id','clone',newBuildArm);
                         modspush(newBuildArm ,'construction_demand.energy','multiply',1000);
                         modspush(newBuildArm ,'construction_demand.metal','multiply',1000);
@@ -140,7 +140,32 @@ define([
                         modspush(item ,'tools.0.spec_id','replace',newBuildArm);
                         modspush(item ,'tools.0.spec_id','tag',' ');
                         //----------------------------------------------------------
-                        
+                        // /pa/units/commanders/base_commander/base_commander_tool_aa_weapon.json
+                        var newwp = unit + '.player.' + (inventory.mods().length + mods.length).toString();
+                        modspush(item ,'tools.3.spec_id','clone',newwp);
+                        modspush(item ,'tools.3.spec_id','replace',newwp);
+                        modspush(item ,'tools.3.spec_id','tag',' ');
+
+                        modspush(newwp ,'target_layers','push',[
+                            "WL_LandHorizontal",
+                            "WL_Seafloor"
+                        ]);
+                        modspush(newwp ,'target_priorities','push',[
+                            "Mobile - Air",
+                            "Mobile",
+                            "Structure - Wall"
+                        ]);
+
+                        // /pa/units/commanders/base_commander/base_commander_aa_ammo.json
+                        var newamm = newwp + '.player.' + (inventory.mods().length + mods.length).toString();
+                        modspush(newwp ,'ammo_id','clone',newamm);
+                        modspush(newwp ,'ammo_id','replace',newamm);
+                        modspush(newwp ,'ammo_id','tag',' ');
+
+                        modspush(newamm ,'damage','multiply',10);
+                        modspush(newamm ,'splash_damage','multiply',10);
+                        modspush(newamm ,'splash_radius','multiply',10);
+                        modspush(newamm ,'full_damage_splash_radius','multiply',10);
                     };
                     _.forEach(commanders, modUnit);
 					//----------------------------------------------------------

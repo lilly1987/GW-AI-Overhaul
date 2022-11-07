@@ -121,8 +121,7 @@ define({
   commanderAAAmmo:
     "/pa/units/commanders/base_commander/base_commander_aa_ammo.json",
   commanderAmmo: "/pa/units/commanders/base_commander/base_commander_ammo.json",
-  commanderBuildArm: "/pa/tools/commander_build_arm/commander_build_arm.json",
-  commanderBuildArmLilly: "/pa/tools/commander_build_arm/commander_build_arm_lilly.json",
+  commanderBuildArm: "/pa/tools/commander_build_arm/commander_build_arm.json",  
   commanderDeath: "/pa/ammo/nuke_pbaoe/nuke_pbaoe.json",
   commanderDeathAir: "/pa/ammo/nuke_pbaoe/nuke_pbaoe_air.json",
   commanderSecondary: "/pa/tools/uber_cannon/uber_cannon.json",
