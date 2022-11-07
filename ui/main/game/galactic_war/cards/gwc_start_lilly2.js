@@ -97,7 +97,7 @@ define([
                         "/pa/units/orbital/orbital_launcher/orbital_launcher.json",
                         "buildable_types",
                          "add",
-                        "| (Orbital & FactoryBuild)",
+                        "| (Orbital & FactoryBuild)"
                     );
                     //----------------------------------------------------------
                     var commanders =
