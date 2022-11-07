@@ -365,6 +365,48 @@ max_advanced_fabbers
                         });
                         mods.push(
                         {
+							file: newBuildArm,
+							path: 'yaw_rate',
+							op: 'multiply',
+							value: 4
+                        });
+                        mods.push(
+                        {
+							file: newBuildArm,
+							path: 'pitch_rate',
+							op: 'multiply',
+							value: 4
+                        });
+                        mods.push(
+                        {
+							file: newBuildArm,
+							path: 'yaw_range',
+							op: 'multiply',
+							value: 2
+                        });
+                        mods.push(
+                        {
+							file: newBuildArm,
+							path: 'pitch_range',
+							op: 'multiply',
+							value: 4
+                        });
+                        mods.push(
+                        {
+							file: newBuildArm,
+							path: 'max_range',
+							op: 'multiply',
+							value: 1000
+                        });
+                        mods.push(
+                        {
+							file: newBuildArm,
+							path: 'assist_layers',
+							op: 'multiply',
+							value: "WL_Orbital"
+                        });
+                        mods.push(
+                        {
 							file: unit,
 							path: 'tools.0.spec_id',
 							op: 'replace',
@@ -380,11 +422,11 @@ max_advanced_fabbers
 					};
 					_.forEach(units, modUnit);
 					/**/
-					$.getJSON("coui://pa/tools/commander_build_arm/commander_build_arm_lilly.json").done(function (text) {						
-						console.log("getJSON commander_build_arm_lilly : "+_.pairs(text)); 
-	                }).fail(function () {
-						console.error('getJSON fail commander_build_arm_lilly');
-					});
+					//$.getJSON("coui://pa/tools/commander_build_arm/commander_build_arm_lilly.json").done(function (text) {						
+					//	console.log("getJSON commander_build_arm_lilly : "+_.pairs(text)); 
+	                //}).fail(function () {
+					//	console.error('getJSON fail commander_build_arm_lilly');
+					//});
 					//----------------------------------------------------------
                     var weaps =
                     [
