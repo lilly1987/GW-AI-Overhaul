@@ -123,7 +123,8 @@ define([
                     {
                         modspush(item ,'buildable_types','add',
 						//'| Land | Naval | Air | Orbital'
-						'| Defense | Titan | Recon'
+						//'| Defense | Titan | Recon | Nuke'
+						'| Defense | Important'
 						);
                         modspush(item ,'navigation.move_speed','multiply',n1);
                         modspush(item ,'navigation.turn_speed','multiply',n1);
