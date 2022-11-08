@@ -67,10 +67,10 @@ define([
 						minion.personality.percent_air=0.2;
 						minion.personality.percent_naval=0.2;
 						minion.personality.percent_orbital=0.2;
-						minion.personality.metal_drain_check=0.5;
-						minion.personality.energy_drain_check=0.5;
-						minion.personality.metal_demand_check=0.5;
-						minion.personality.energy_demand_check=0.5;
+						//minion.personality.metal_drain_check=0.5;
+						//minion.personality.energy_drain_check=0.5;
+						//minion.personality.metal_demand_check=0.5;
+						//minion.personality.energy_demand_check=0.5;
 						minion.personality.personality_tags=_.pull(minion.personality.personality_tags, 'SlowerExpansion');
                         inventory.minions.push(minion);
                     });
@@ -122,7 +122,8 @@ define([
                     var modUnit = function(item)
                     {
                         modspush(item ,'buildable_types','add',
-						'| Land | Naval | Air | Orbital'
+						//'| Land | Naval | Air | Orbital'
+						'| Defense | Titan | Recon'
 						);
                         modspush(item ,'navigation.move_speed','multiply',n1);
                         modspush(item ,'navigation.turn_speed','multiply',n1);
@@ -131,6 +132,30 @@ define([
                         modspush(item ,'production.metal','multiply',n2);
                         modspush(item ,'storage.energy','multiply',n2);
                         modspush(item ,'storage.metal','multiply',n2);
+                        //----------------------------------------------------------
+                        modspush(item ,'recon.observer.items','push',
+				{
+					"layer": "surface_and_air",
+					"channel": "radar",
+					"shape": "capsule",
+					"radius": 1000,
+					"uses_energy": true
+				},
+				{
+					"layer": "orbital",
+					"channel": "radar",
+					"shape": "capsule",
+					"radius": 1000,
+					"uses_energy": true
+				},
+				{
+					"layer": "underwater",
+					"channel": "radar",
+					"shape": "capsule",
+					"radius": 1000,
+					"uses_energy": true
+				}
+						);
                         //----------------------------------------------------------
 						// /pa/tools/commander_build_arm/commander_build_arm.json
                         var newBuildArm = item + '.player.' + (inventory.mods().length + mods.length).toString();
