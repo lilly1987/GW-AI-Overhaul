@@ -67,10 +67,10 @@ define([
 						minion.personality.percent_air=0.2;
 						minion.personality.percent_naval=0.2;
 						minion.personality.percent_orbital=0.2;
-						minion.personality.metal_drain_check=1;
-						minion.personality.energy_drain_check=1;
-						minion.personality.metal_demand_check=1;
-						minion.personality.energy_demand_check=1;
+						minion.personality.metal_drain_check=0.5;
+						minion.personality.energy_drain_check=0.5;
+						minion.personality.metal_demand_check=0.5;
+						minion.personality.energy_demand_check=0.5;
 						minion.personality.personality_tags=_.pull(minion.personality.personality_tags, 'SlowerExpansion');
                         inventory.minions.push(minion);
                     });
@@ -93,12 +93,12 @@ define([
 					var n25=500;
 					var n3=1000;
 					//----------------------------------------------------------
-                    modspush(
-                        "/pa/units/orbital/orbital_launcher/orbital_launcher.json",
-                        "buildable_types",
-                         "add",
-                        "| (Orbital & FactoryBuild)"
-                    );
+                    //modspush(
+                    //    "/pa/units/orbital/orbital_launcher/orbital_launcher.json",
+                    //    "buildable_types",
+                    //     "add",
+                    //    "| (Orbital & FactoryBuild)"
+                    //);
                     //----------------------------------------------------------
                     var commanders =
                     [
@@ -121,16 +121,23 @@ define([
                     ];
                     var modUnit = function(item)
                     {
+                        modspush(item ,'buildable_types','add',
+						'| Land | Naval | Air | Orbital'
+						);
                         modspush(item ,'navigation.move_speed','multiply',n1);
                         modspush(item ,'navigation.turn_speed','multiply',n1);
                         modspush(item ,'max_health','multiply',n1);
-                        modspush(item ,'production.energy','multiply',n1);
-                        modspush(item ,'production.metal','multiply',n1);
-                        modspush(item ,'storage.energy','multiply',n1);
-                        modspush(item ,'storage.metal','multiply',n1);
+                        modspush(item ,'production.energy','multiply',n2);
+                        modspush(item ,'production.metal','multiply',n2);
+                        modspush(item ,'storage.energy','multiply',n2);
+                        modspush(item ,'storage.metal','multiply',n2);
                         //----------------------------------------------------------
+						// /pa/tools/commander_build_arm/commander_build_arm.json
                         var newBuildArm = item + '.player.' + (inventory.mods().length + mods.length).toString();
                         modspush(item ,'tools.0.spec_id','clone',newBuildArm);
+                        modspush(item ,'tools.0.spec_id','replace',newBuildArm);
+                        modspush(item ,'tools.0.spec_id','tag',' ');
+						
                         modspush(newBuildArm ,'construction_demand.energy','multiply',1000);
                         modspush(newBuildArm ,'construction_demand.metal','multiply',1000);
                         modspush(newBuildArm ,'yaw_rate','multiply',4);
@@ -139,8 +146,6 @@ define([
                         modspush(newBuildArm ,'pitch_range','multiply',4);
                         modspush(newBuildArm ,'max_range','multiply',1000);
                         modspush(newBuildArm ,'assist_layers','push',"WL_Orbital");
-                        modspush(item ,'tools.0.spec_id','replace',newBuildArm);
-                        modspush(item ,'tools.0.spec_id','tag',' ');
                         //----------------------------------------------------------
                         // /pa/units/commanders/base_commander/base_commander_tool_aa_weapon.json
                         var newwp = item + '.player.' + (inventory.mods().length + mods.length).toString();
@@ -148,6 +153,8 @@ define([
                         modspush(item ,'tools.3.spec_id','replace',newwp);
                         modspush(item ,'tools.3.spec_id','tag',' ');
 
+                        modspush(newwp ,'max_range','multiply',2);
+                        modspush(newwp ,'rate_of_fire','multiply',2);
                         modspush(newwp ,'target_layers','push',[
                             "WL_Orbital",
                             "WL_LandHorizontal",
@@ -166,10 +173,13 @@ define([
                         modspush(newwp ,'ammo_id','replace',newamm);
                         modspush(newwp ,'ammo_id','tag',' ');
 
-                        modspush(newamm ,'damage','multiply',10);
-                        modspush(newamm ,'splash_damage','multiply',10);
-                        modspush(newamm ,'splash_radius','multiply',10);
-                        modspush(newamm ,'full_damage_splash_radius','multiply',10);
+                        modspush(newamm ,'damage','multiply',n2);
+                        modspush(newamm ,'splash_damage','multiply',n2);
+                        modspush(newamm ,'splash_radius','multiply',n2);
+                        modspush(newamm ,'full_damage_splash_radius','multiply',n2);
+                        //modspush(newamm ,'initial_velocity','multiply',2);
+                        modspush(newamm ,'max_velocity','multiply',2);
+                        modspush(newamm ,'lifetime','multiply',2);
                     };
                     _.forEach(commanders, modUnit);
 					//----------------------------------------------------------
