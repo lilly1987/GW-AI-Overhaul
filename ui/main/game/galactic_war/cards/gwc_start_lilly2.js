@@ -75,6 +75,7 @@ define([
 					var n2=100;
 					var n25=500;
 					var n3=1000;
+					var n4=10000;
 					//----------------------------------------------------------
                     //modspush(
                     //    "/pa/units/orbital/orbital_launcher/orbital_launcher.json",
@@ -130,15 +131,16 @@ define([
 					//console.log('lilly minionSpecs :' + minionSpecs);
                     inventory.addUnits(minionSpecs);
 					//----------------------------------------------------------
+					//--------------------------- for minion -------------------------------
 					var modUnit = function(item)
                     {
                         modspush(item ,'navigation.move_speed','multiply',n02);
                         modspush(item ,'navigation.turn_speed','multiply',n02);
-                        modspush(item ,'max_health','multiply',n2);
-                        modspush(item ,'production.energy','multiply',n02);
-                        modspush(item ,'production.metal','multiply',n02);
-                        modspush(item ,'storage.energy','multiply',n02);
-                        modspush(item ,'storage.metal','multiply',n02);
+                        modspush(item ,'max_health','multiply',n1);
+                        modspush(item ,'production.energy','multiply',n04);
+                        modspush(item ,'production.metal','multiply',n04);
+                        modspush(item ,'storage.energy','multiply',n04);
+                        modspush(item ,'storage.metal','multiply',n04);
                         //----------------------------------------------------------
 						// /pa/tools/commander_build_arm/commander_build_arm.json
                         var newBuildArm = item + '.player.' + (inventory.mods().length + mods.length).toString();
@@ -158,6 +160,7 @@ define([
                     };
                     _.forEach(minions, modUnit);
 					//----------------------------------------------------------
+					//--------------------- for commander -----------------------
                     var modUnit = function(item)
                     {
                         modspush(item ,'buildable_types','add',
@@ -170,10 +173,10 @@ define([
                         modspush(item ,'navigation.move_speed','multiply',n1);
                         modspush(item ,'navigation.turn_speed','multiply',n1);
                         modspush(item ,'max_health','multiply',n1);
-                        modspush(item ,'production.energy','multiply',n2);
-                        modspush(item ,'production.metal','multiply',n2);
-                        modspush(item ,'storage.energy','multiply',n2);
-                        modspush(item ,'storage.metal','multiply',n2);
+                        modspush(item ,'production.energy','multiply',n3);
+                        modspush(item ,'production.metal','multiply',n3);
+                        modspush(item ,'storage.energy','multiply',n3);
+                        modspush(item ,'storage.metal','multiply',n3);
                         //----------------------------------------------------------
                         modspush(item ,'recon.observer.items','push',
 						[{
@@ -199,6 +202,7 @@ define([
 						}]
 						);
                         //----------------------------------------------------------
+						
 						// /pa/tools/commander_build_arm/commander_build_arm.json
                         var newBuildArm = item + '.player.' + (inventory.mods().length + mods.length).toString();
 						console.log('lilly newBuildArm :' + newBuildArm);
@@ -221,7 +225,7 @@ define([
                         modspush(item ,'tools.3.spec_id','replace',newwp);
                         modspush(item ,'tools.3.spec_id','tag',' ');
 
-                        modspush(newwp ,'max_range','multiply',2);
+                        modspush(newwp ,'max_range','multiply',1.5);
                         modspush(newwp ,'rate_of_fire','multiply',2);
                         modspush(newwp ,'target_layers','push',[
                             "WL_Orbital",
@@ -246,7 +250,7 @@ define([
                         modspush(newamm ,'splash_radius','multiply',n2);
                         modspush(newamm ,'full_damage_splash_radius','multiply',n2);
                         //modspush(newamm ,'initial_velocity','multiply',2);
-                        modspush(newamm ,'max_velocity','multiply',2);
+                        modspush(newamm ,'max_velocity','multiply',4);
                         modspush(newamm ,'lifetime','multiply',2);
                     };
                     _.forEach(commanders, modUnit);
