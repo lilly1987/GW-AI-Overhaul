@@ -28,7 +28,7 @@ define(["coui://ui/mods/com.pa.quitch.gwaioverhaul/shared/cards.js"], function (
       };
     },
     buff: function (inventory) {
-      inventory.maxCards(inventory.maxCards() + 5); // one for card and one slot
+      inventory.maxCards(inventory.maxCards() + 13); // one for card and one slot
     },
     dull: function () {
       //empty

@@ -50,6 +50,7 @@ define([
         },
         buff: function(inventory, context)
         {
+			inventory.maxCards(inventory.maxCards() + 20);
 			//console.log("params p : "+_.pairs(params)); 
             if (inventory.lookupCard(CARD) === 0)
             {
@@ -57,26 +58,7 @@ define([
                 var buffCount = inventory.getTag('', 'buffCount', 0);
                 if (!buffCount) {
                     GWCStart.buff(inventory);
-                    inventory.maxCards(inventory.maxCards() + 8);
-					//----------------------------------------------------------
-                    _.forEach(context.minions, function(minion)
-                    {
-						minion.personality.micro_type=2;
-						minion.personality.percent_vehicle=0.2;
-						minion.personality.percent_land=0.2;
-						minion.personality.percent_air=0.2;
-						minion.personality.percent_naval=0.2;
-						minion.personality.percent_orbital=0.2;
-						//minion.personality.metal_drain_check=0.5;
-						//minion.personality.energy_drain_check=0.5;
-						//minion.personality.metal_demand_check=0.5;
-						//minion.personality.energy_demand_check=0.5;
-						minion.personality.personality_tags=_.pull(minion.personality.personality_tags, 'SlowerExpansion');
-                        inventory.minions.push(minion);
-                    });
-                    var minionSpecs = _.filter(_.pluck(context.minions, 'commander'));
-					//console.log('lilly.minionSpecs :' + minionSpecs);
-                    inventory.addUnits(minionSpecs);
+
 					//----------------------------------------------------------
                     var mods = [];
                     function modspush(item, path,op,value) {
@@ -115,6 +97,27 @@ define([
                     _.forEach(commanders, modUnit);
 					//----------------------------------------------------------
                     var commander = inventory.getTag('global', 'commander');
+					//----------------------------------------------------------
+                    _.forEach(context.minions, function(minion)
+                    {
+						minion.personality.micro_type=2;
+						minion.personality.percent_vehicle=0.2;
+						minion.personality.percent_land=0.2;
+						minion.personality.percent_air=0.2;
+						minion.personality.percent_naval=0.2;
+						minion.personality.percent_orbital=0.2;
+						//minion.personality.metal_drain_check=0.5;
+						//minion.personality.energy_drain_check=0.5;
+						//minion.personality.metal_demand_check=0.5;
+						//minion.personality.energy_demand_check=0.5;
+						minion.personality.personality_tags=_.pull(minion.personality.personality_tags, 'SlowerExpansion');
+						minion.commander=commander;
+                        inventory.minions.push(minion);
+                    });
+                    var minionSpecs = _.filter(_.pluck(context.minions, 'commander'));
+					//console.log('lilly.minionSpecs :' + minionSpecs);
+                    inventory.addUnits(minionSpecs);
+					//----------------------------------------------------------
                     var commanders =
                     [
 						commander
@@ -124,7 +127,9 @@ define([
                         modspush(item ,'buildable_types','add',
 						//'| Land | Naval | Air | Orbital'
 						//'| Defense | Titan | Recon | Nuke'
-						'| Defense | Important'
+						'| ( Defense | Important ) - CombatFabBuild'
+						//'( CmdBuild | Factory| FactoryBuild | Important | FabBuild | FabAdvBuild)'
+						//'- CombatFabBuild - FabBuild '
 						);
                         modspush(item ,'navigation.move_speed','multiply',n1);
                         modspush(item ,'navigation.turn_speed','multiply',n1);
