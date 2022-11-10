@@ -69,7 +69,8 @@ define([
                             value: value
                         });
                     }
-					var n0=4;
+					var n02=2;
+					var n04=4;
 					var n1=10;
 					var n2=100;
 					var n25=500;
@@ -82,21 +83,27 @@ define([
                     //    "| (Orbital & FactoryBuild)"
                     //);
                     //----------------------------------------------------------
-                    var commanders =
-                    [
-                        '/pa/units/commanders/base_commander/base_commander.json',
-                    ];
-                    var modUnit = function(item)
-                    {
-                        modspush(item ,'max_health','multiply',n1);
-                        modspush(item ,'production.energy','multiply',n1);
-                        modspush(item ,'production.metal','multiply',n1);
-                        modspush(item ,'storage.energy','multiply',n1);
-                        modspush(item ,'storage.metal','multiply',n1);
-                    };
-                    _.forEach(commanders, modUnit);
+                    //var commanders =
+                    //[
+                    //    '/pa/units/commanders/base_commander/base_commander.json',
+                    //];
+                    //var modUnit = function(item)
+                    //{
+                    //    modspush(item ,'max_health','multiply',n1);
+                    //    modspush(item ,'production.energy','multiply',n1);
+                    //    modspush(item ,'production.metal','multiply',n1);
+                    //    modspush(item ,'storage.energy','multiply',n1);
+                    //    modspush(item ,'storage.metal','multiply',n1);
+                    //};
+                    //_.forEach(commanders, modUnit);
 					//----------------------------------------------------------
                     var commander = inventory.getTag('global', 'commander');
+					console.log('lilly commander :' + commander);
+                    var minions =[];
+                    var commanders =
+                    [
+						commander
+                    ];
 					//----------------------------------------------------------
                     _.forEach(context.minions, function(minion)
                     {
@@ -111,17 +118,46 @@ define([
 						//minion.personality.metal_demand_check=0.5;
 						//minion.personality.energy_demand_check=0.5;
 						minion.personality.personality_tags=_.pull(minion.personality.personality_tags, 'SlowerExpansion');
-						minion.commander=commander;
+						//minion.commander=commander; //너무 사기됨
+						if(!_.includes(minions,minion.commander)){
+							minions.push(minion.commander);
+							console.log("lilly minion.commander : "+ minion.commander); 
+						}
                         inventory.minions.push(minion);
                     });
+					console.log("lilly minions p : "+_.pairs(minions)); 
                     var minionSpecs = _.filter(_.pluck(context.minions, 'commander'));
-					//console.log('lilly.minionSpecs :' + minionSpecs);
+					//console.log('lilly minionSpecs :' + minionSpecs);
                     inventory.addUnits(minionSpecs);
 					//----------------------------------------------------------
-                    var commanders =
-                    [
-						commander
-                    ];
+					var modUnit = function(item)
+                    {
+                        modspush(item ,'navigation.move_speed','multiply',n02);
+                        modspush(item ,'navigation.turn_speed','multiply',n02);
+                        modspush(item ,'max_health','multiply',n2);
+                        modspush(item ,'production.energy','multiply',n02);
+                        modspush(item ,'production.metal','multiply',n02);
+                        modspush(item ,'storage.energy','multiply',n02);
+                        modspush(item ,'storage.metal','multiply',n02);
+                        //----------------------------------------------------------
+						// /pa/tools/commander_build_arm/commander_build_arm.json
+                        var newBuildArm = item + '.player.' + (inventory.mods().length + mods.length).toString();
+						console.log('lilly newBuildArm :' + newBuildArm);
+                        modspush(item ,'tools.0.spec_id','clone',newBuildArm);
+                        modspush(item ,'tools.0.spec_id','replace',newBuildArm);
+                        modspush(item ,'tools.0.spec_id','tag',' ');
+						
+                        modspush(newBuildArm ,'construction_demand.energy','multiply',n02);
+                        modspush(newBuildArm ,'construction_demand.metal','multiply',n02);
+                        modspush(newBuildArm ,'yaw_rate','multiply',4);
+                        modspush(newBuildArm ,'pitch_rate','multiply',4);
+                        modspush(newBuildArm ,'yaw_range','multiply',2);
+                        modspush(newBuildArm ,'pitch_range','multiply',4);
+                        modspush(newBuildArm ,'max_range','multiply',n02);
+                        modspush(newBuildArm ,'assist_layers','push',"WL_Orbital");
+                    };
+                    _.forEach(minions, modUnit);
+					//----------------------------------------------------------
                     var modUnit = function(item)
                     {
                         modspush(item ,'buildable_types','add',
@@ -140,31 +176,32 @@ define([
                         modspush(item ,'storage.metal','multiply',n2);
                         //----------------------------------------------------------
                         modspush(item ,'recon.observer.items','push',
-				{
-					"layer": "surface_and_air",
-					"channel": "radar",
-					"shape": "capsule",
-					"radius": 1000,
-					"uses_energy": true
-				},
-				{
-					"layer": "orbital",
-					"channel": "radar",
-					"shape": "capsule",
-					"radius": 1000,
-					"uses_energy": true
-				},
-				{
-					"layer": "underwater",
-					"channel": "radar",
-					"shape": "capsule",
-					"radius": 1000,
-					"uses_energy": true
-				}
+						[{
+							"layer": "surface_and_air",
+							"channel": "radar",
+							"shape": "capsule",
+							"radius": 1000,
+							"uses_energy": true
+						},
+						{
+							"layer": "orbital",
+							"channel": "radar",
+							"shape": "capsule",
+							"radius": 1000,
+							"uses_energy": true
+						},
+						{
+							"layer": "underwater",
+							"channel": "radar",
+							"shape": "capsule",
+							"radius": 1000,
+							"uses_energy": true
+						}]
 						);
                         //----------------------------------------------------------
 						// /pa/tools/commander_build_arm/commander_build_arm.json
                         var newBuildArm = item + '.player.' + (inventory.mods().length + mods.length).toString();
+						console.log('lilly newBuildArm :' + newBuildArm);
                         modspush(item ,'tools.0.spec_id','clone',newBuildArm);
                         modspush(item ,'tools.0.spec_id','replace',newBuildArm);
                         modspush(item ,'tools.0.spec_id','tag',' ');
