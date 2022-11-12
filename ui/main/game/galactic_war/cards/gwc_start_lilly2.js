@@ -58,7 +58,11 @@ define([
                 var buffCount = inventory.getTag('', 'buffCount', 0);
                 if (!buffCount) {
                     GWCStart.buff(inventory);
+                    inventory.addUnits(
+                    [
+                        '/pa/units/land/tactical_missile_launcher/tactical_missile_launcher.json',
 
+                    ]);
 					//----------------------------------------------------------
                     var mods = [];
                     function modspush(item, path,op,value) {
@@ -166,7 +170,7 @@ define([
                         modspush(item ,'buildable_types','add',
 						//'| Land | Naval | Air | Orbital'
 						//'| Defense | Titan | Recon | Nuke'
-						'| ( Defense | Important ) - CombatFabBuild'
+						'| ( Defense | Important | Recon ) - CombatFabBuild'
 						//'( CmdBuild | Factory| FactoryBuild | Important | FabBuild | FabAdvBuild)'
 						//'- CombatFabBuild - FabBuild '
 						);
@@ -181,24 +185,24 @@ define([
                         modspush(item ,'recon.observer.items','push',
 						[{
 							"layer": "surface_and_air",
-							"channel": "radar",
+							"channel": "sight",
 							"shape": "capsule",
-							"radius": 1000,
-							"uses_energy": true
+							"radius": 10000,
+							"uses_energy": false
 						},
 						{
 							"layer": "orbital",
-							"channel": "radar",
+							"channel": "sight",
 							"shape": "capsule",
-							"radius": 1000,
-							"uses_energy": true
+							"radius": 10000,
+							"uses_energy": false
 						},
 						{
 							"layer": "underwater",
-							"channel": "radar",
+							"channel": "sight",
 							"shape": "capsule",
-							"radius": 1000,
-							"uses_energy": true
+							"radius": 10000,
+							"uses_energy": false
 						}]
 						);
                         //----------------------------------------------------------
