@@ -228,9 +228,9 @@ define([
         return new Function("attribute", value)(attribute);
       },
       clone: function (attribute, value) {
-		console.log('lilly.clone : '+ attribute);
-		console.log('lilly.clone : '+ value);
-		console.log('lilly.clone : '+ specTag);
+		console.log('lilly clone1 : '+ attribute);
+		console.log('lilly clone2 : '+ value);
+		console.log('lilly clone3 : '+ specTag);
         var loaded = load(attribute);
         if (loaded) {
           loaded = _.cloneDeep(loaded);
@@ -241,8 +241,8 @@ define([
         // hack fix for mirrorMode due to the fact that
         // `attribute` was retaining the previous `specTag`s
         // and I couldn't track down why
-		console.log('lilly.tag : '+ attribute);
-		console.log('lilly.tag : '+ specTag);
+		console.log('lilly tag : '+ attribute);
+		console.log('lilly tag : '+ specTag);
 		var cleanAttribute=attribute;
 		//try {
 		//	cleanAttribute = attribute.slice(
@@ -252,7 +252,7 @@ define([
 		//} catch (e) {
 		//  // empty
 		//}
-		console.log('lilly.tag : '+ cleanAttribute + specTag);
+		//console.log('lilly.tag : '+ cleanAttribute + specTag);
         return cleanAttribute + specTag;
       },
       pull: function (attribute, value) {

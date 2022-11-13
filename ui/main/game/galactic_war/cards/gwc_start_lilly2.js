@@ -72,7 +72,10 @@ define([
                             op: op,
                             value: value
                         });
-                    }
+                    } ;
+                    function newid(item) {
+                        return item + '.' + (inventory.mods().length + mods.length).toString();
+                    } ;
 					var n02=2;
 					var n04=4;
 					var n1=10;
@@ -138,6 +141,7 @@ define([
 					//--------------------------- for minion -------------------------------
 					var modUnit = function(item)
                     {
+						console.log("lillt item : "+ item); 
                         modspush(item ,'navigation.move_speed','multiply',n02);
                         modspush(item ,'navigation.turn_speed','multiply',n02);
                         modspush(item ,'max_health','multiply',n1);
@@ -147,145 +151,186 @@ define([
                         modspush(item ,'storage.metal','multiply',n04);
                         //----------------------------------------------------------
 						// /pa/tools/commander_build_arm/commander_build_arm.json
-                        var newBuildArm = item + '.player.' + (inventory.mods().length + mods.length).toString();
-						console.log('lilly newBuildArm :' + newBuildArm);
-                        modspush(item ,'tools.0.spec_id','clone',newBuildArm);
-                        modspush(item ,'tools.0.spec_id','replace',newBuildArm);
-                        modspush(item ,'tools.0.spec_id','tag',' ');
+                        var id = newid(item) ;
+						console.log('lilly id1 :' + id);
+                        modspush(item ,'tools.0.spec_id','clone',id);
+						id=id + '.player';
+                        //modspush(item ,'tools.0.spec_id','tag',' ');
+                        modspush(item ,'tools.0.spec_id','replace',id);
 						
-                        modspush(newBuildArm ,'construction_demand.energy','multiply',n02);
-                        modspush(newBuildArm ,'construction_demand.metal','multiply',n02);
-                        modspush(newBuildArm ,'yaw_rate','multiply',4);
-                        modspush(newBuildArm ,'pitch_rate','multiply',4);
-                        modspush(newBuildArm ,'yaw_range','multiply',2);
-                        modspush(newBuildArm ,'pitch_range','multiply',4);
-                        modspush(newBuildArm ,'max_range','multiply',n02);
-                        modspush(newBuildArm ,'assist_layers','push',"WL_Orbital");
+                        modspush(id ,'construction_demand.energy','multiply',n02);
+                        modspush(id ,'construction_demand.metal','multiply',n02);
+                        modspush(id ,'yaw_rate','multiply',4);
+                        modspush(id ,'pitch_rate','multiply',4);
+                        modspush(id ,'yaw_range','multiply',2);
+                        modspush(id ,'pitch_range','multiply',4);
+                        modspush(id ,'max_range','multiply',n02);
+                        modspush(id ,'assist_layers','push',"WL_Orbital");
+						
+                        //----------------------------------------------------------
+//                        var id = newid(item) ;
+//						console.log('lilly id2 :' + id);
+//                        modspush(item ,'tools.0.spec_id','clone',id);
+//						newBuildArm=id+ '.player'
+//                        //id(item ,'tools.0.spec_id','tag',' ');
+//                        modspush(item ,'tools','push',
+//							{
+//								"spec_id": id,
+//								"muzzle_bone": "socket_rightMuzzle",
+//								"aim_bone": "bone_turret"
+//							}
+//						);
+//						
+//                        modspush(id ,'auto_repair','replace',true);
+//                        modspush(id ,'auto_reclaim','replace',true);
+//                        modspush(id ,'can_only_assist_with_buildable_items','replace',true);
                     };
                     _.forEach(minions, modUnit);
-					//----------------------------------------------------------
-					//--------------------- for commander -----------------------
-                    var modUnit = function(item)
-                    {
-                        modspush(item ,'buildable_types','add',
-						//'| Land | Naval | Air | Orbital'
-						//'| Defense | Titan | Recon | Nuke'
-						'| ( Defense | Important | Recon ) - CombatFabBuild'
-						//'( CmdBuild | Factory| FactoryBuild | Important | FabBuild | FabAdvBuild)'
-						//'- CombatFabBuild - FabBuild '
-						);
-                        modspush(item ,'navigation.move_speed','multiply',n1);
-                        modspush(item ,'navigation.turn_speed','multiply',n1);
-                        modspush(item ,'max_health','multiply',n1);
-                        modspush(item ,'production.energy','multiply',n3);
-                        modspush(item ,'production.metal','multiply',n3);
-                        modspush(item ,'storage.energy','multiply',n3);
-                        modspush(item ,'storage.metal','multiply',n3);
-                        //----------------------------------------------------------
-                        modspush(item ,'recon.observer.items','push',
-						[{
-							"layer": "surface_and_air",
-							"channel": "sight",
-							"shape": "capsule",
-							"radius": 10000,
-							"uses_energy": false
-						},
-						{
-							"layer": "orbital",
-							"channel": "sight",
-							"shape": "capsule",
-							"radius": 10000,
-							"uses_energy": false
-						},
-						{
-							"layer": "underwater",
-							"channel": "sight",
-							"shape": "capsule",
-							"radius": 10000,
-							"uses_energy": false
-						}]
-						);
-                        //----------------------------------------------------------
-						
-						// /pa/tools/commander_build_arm/commander_build_arm.json
-                        var newBuildArm = item + '.player.' + (inventory.mods().length + mods.length).toString();
-						console.log('lilly newBuildArm :' + newBuildArm);
-                        modspush(item ,'tools.0.spec_id','clone',newBuildArm);
-                        modspush(item ,'tools.0.spec_id','replace',newBuildArm);
-                        modspush(item ,'tools.0.spec_id','tag',' ');
-						
-                        modspush(newBuildArm ,'construction_demand.energy','multiply',1000);
-                        modspush(newBuildArm ,'construction_demand.metal','multiply',1000);
-                        modspush(newBuildArm ,'yaw_rate','multiply',4);
-                        modspush(newBuildArm ,'pitch_rate','multiply',4);
-                        modspush(newBuildArm ,'yaw_range','multiply',2);
-                        modspush(newBuildArm ,'pitch_range','multiply',4);
-                        modspush(newBuildArm ,'max_range','multiply',1000);
-                        modspush(newBuildArm ,'assist_layers','push',"WL_Orbital");
-                        //----------------------------------------------------------
-                        // /pa/units/commanders/base_commander/base_commander_tool_aa_weapon.json
-                        var newwp = item + '.player.' + (inventory.mods().length + mods.length).toString();
-                        modspush(item ,'tools.3.spec_id','clone',newwp);
-                        modspush(item ,'tools.3.spec_id','replace',newwp);
-                        modspush(item ,'tools.3.spec_id','tag',' ');
-
-                        modspush(newwp ,'max_range','multiply',1.5);
-                        modspush(newwp ,'rate_of_fire','multiply',2);
-                        modspush(newwp ,'target_layers','push',[
-                            "WL_Orbital",
-                            "WL_LandHorizontal",
-                            "WL_Seafloor",
-                            "WL_WaterSurface"
-                        ]);
-                        /*modspush(newwp ,'target_priorities','push',[
-                            "Mobile - Air",
-                            "Mobile",
-                            "Structure - Wall"
-                        ]);*/
-
-                        // /pa/units/commanders/base_commander/base_commander_aa_ammo.json
-                        var newamm = newwp + '.player.' + (inventory.mods().length + mods.length).toString();
-                        modspush(newwp ,'ammo_id','clone',newamm);
-                        modspush(newwp ,'ammo_id','replace',newamm);
-                        modspush(newwp ,'ammo_id','tag',' ');
-
-                        modspush(newamm ,'damage','multiply',n2);
-                        modspush(newamm ,'splash_damage','multiply',n2);
-                        modspush(newamm ,'splash_radius','multiply',n2);
-                        modspush(newamm ,'full_damage_splash_radius','multiply',n2);
-                        //modspush(newamm ,'initial_velocity','multiply',2);
-                        modspush(newamm ,'max_velocity','multiply',4);
-                        modspush(newamm ,'lifetime','multiply',2);
-                    };
-                    _.forEach(commanders, modUnit);
-					//----------------------------------------------------------
-                    var weaps =
-                    [
-                        '/pa/tools/uber_cannon/uber_cannon.json',
-                        '/pa/units/commanders/base_commander/base_commander_tool_weapon.json',
-                        //'/pa/units/commanders/base_commander/base_commander_tool_weapon_lilly.json',
-                    ];
-                    var modWeap = function(item)
-                    {
-                        modspush(item ,'ammo_capacity','multiply',0.125);
-                        modspush(item ,'ammo_demand','multiply',0.125);
-                        modspush(item ,'ammo_per_shot','multiply',0.125);
-                        modspush(item ,'rate_of_fire','multiply',8.0);
-                    };
-                    _.forEach(weaps, modWeap);
-					//----------------------------------------------------------
-                    var ammos =
-                    [
-                        '/pa/units/commanders/base_commander/base_commander_ammo.json',
-                        //'/pa/units/commanders/base_commander/base_commander_ammo_lilly.json',
-                    ];
-                    var modammo = function(item)
-                    {
-                        modspush(item ,'initial_velocity','multiply',2.0);
-                        modspush(item ,'max_velocity','multiply',2.0);
-                    };
-                    _.forEach(ammos, modammo);
-                    //----------------------------------------------------------
+//					//----------------------------------------------------------
+//					//--------------------- for commander -----------------------
+//                    var modUnit = function(item)
+//                    {
+//                        modspush(item ,'buildable_types','add',
+//						//'| Land | Naval | Air | Orbital'
+//						//'| Defense | Titan | Recon | Nuke'
+//						'| ( Defense | Important | Recon ) - CombatFabBuild'
+//						//'( CmdBuild | Factory| FactoryBuild | Important | FabBuild | FabAdvBuild)'
+//						//'- CombatFabBuild - FabBuild '
+//						);
+//                        modspush(item ,'navigation.move_speed','multiply',n1);
+//                        modspush(item ,'navigation.turn_speed','multiply',n1);
+//                        modspush(item ,'max_health','multiply',n1);
+//                        modspush(item ,'production.energy','multiply',n3);
+//                        modspush(item ,'production.metal','multiply',n3);
+//                        modspush(item ,'storage.energy','multiply',n3);
+//                        modspush(item ,'storage.metal','multiply',n3);
+//                        //----------------------------------------------------------
+//                        modspush(item ,'recon.observer.items','push',
+//						[{
+//							"layer": "surface_and_air",
+//							"channel": "sight",
+//							"shape": "capsule",
+//							"radius": 10000,
+//							"uses_energy": false
+//						},
+//						{
+//							"layer": "orbital",
+//							"channel": "sight",
+//							"shape": "capsule",
+//							"radius": 10000,
+//							"uses_energy": false
+//						},
+//						{
+//							"layer": "underwater",
+//							"channel": "sight",
+//							"shape": "capsule",
+//							"radius": 10000,
+//							"uses_energy": false
+//						}]
+//						);
+//                        //----------------------------------------------------------
+//						// /pa/tools/commander_build_arm/commander_build_arm.json
+//                        var newBuildArm = item +(inventory.mods().length + mods.length).toString();
+//						console.log('lilly newBuildArm3 :' + newBuildArm);
+//                        modspush(item ,'tools.0.spec_id','clone',newBuildArm);
+//						newBuildArm=newBuildArm + '.player'
+//                        //modspush(item ,'tools.0.spec_id','tag',' ');
+//                        //modspush(newBuildArm ,'','tag',' ');
+//                        modspush(item ,'tools.0.spec_id','replace',newBuildArm);
+//						
+//                        modspush(newBuildArm ,'construction_demand.energy','multiply',1000);
+//                        modspush(newBuildArm ,'construction_demand.metal','multiply',1000);
+//                        modspush(newBuildArm ,'yaw_rate','multiply',4);
+//                        modspush(newBuildArm ,'pitch_rate','multiply',4);
+//                        modspush(newBuildArm ,'yaw_range','multiply',2);
+//                        modspush(newBuildArm ,'pitch_range','multiply',4);
+//                        modspush(newBuildArm ,'max_range','multiply',1000);
+//                        modspush(newBuildArm ,'assist_layers','push',"WL_Orbital");
+//                        //----------------------------------------------------------
+//                        var newBuildArm = item + (inventory.mods().length + mods.length).toString();
+//						console.log('lilly newBuildArm4 :' + newBuildArm);
+//                        modspush(item ,'tools.0.spec_id','clone',newBuildArm);
+//						newBuildArm=newBuildArm + '.player'
+//                        //modspush(item ,'tools.0.spec_id','tag',' ');
+//                        modspush(item ,'tools','push',
+//							{
+//								"spec_id": newBuildArm,
+//								"muzzle_bone": "socket_rightMuzzle",
+//								"aim_bone": "bone_turret"
+//							}
+//						);
+//                        modspush(item ,'_.slice(tools,-1)[0].spec_id','tag',' ');
+//						
+//						
+//                        modspush(newBuildArm ,'auto_repair','replace',true);
+//                        modspush(newBuildArm ,'auto_reclaim','replace',true);
+//                        modspush(newBuildArm ,'can_only_assist_with_buildable_items','replace',true);
+//                        //----------------------------------------------------------
+//                        // /pa/units/commanders/base_commander/base_commander_tool_aa_weapon.json
+//                        var newwp = item  + (inventory.mods().length + mods.length).toString();
+//                        modspush(item ,'tools.3.spec_id','clone',newwp);
+//						newwp=newwp + '.player'
+//                        modspush(item ,'tools.3.spec_id','replace',newwp);
+//                        //modspush(item ,'tools.3.spec_id','tag',' ');
+//
+//                        modspush(newwp ,'max_range','multiply',1.5);
+//                        modspush(newwp ,'rate_of_fire','multiply',2);
+//                        modspush(newwp ,'target_layers','push',[
+//                            "WL_Orbital",
+//                            "WL_LandHorizontal",
+//                            "WL_Seafloor",
+//                            "WL_WaterSurface"
+//                        ]);
+//                        /*modspush(newwp ,'target_priorities','push',[
+//                            "Mobile - Air",
+//                            "Mobile",
+//                            "Structure - Wall"
+//                        ]);*/
+//
+//                        // /pa/units/commanders/base_commander/base_commander_aa_ammo.json
+//                        var newamm = newwp  + (inventory.mods().length + mods.length).toString();
+//                        modspush(newwp ,'ammo_id','clone',newamm);
+//						newamm=newamm + '.player'
+//                        modspush(newwp ,'ammo_id','replace',newamm);
+//                        //modspush(newwp ,'ammo_id','tag',' ');
+//
+//                        modspush(newamm ,'damage','multiply',n2);
+//                        modspush(newamm ,'splash_damage','multiply',n2);
+//                        modspush(newamm ,'splash_radius','multiply',n2);
+//                        modspush(newamm ,'full_damage_splash_radius','multiply',n2);
+//                        //modspush(newamm ,'initial_velocity','multiply',2);
+//                        modspush(newamm ,'max_velocity','multiply',4);
+//                        modspush(newamm ,'lifetime','multiply',2);
+//                    };
+//                    _.forEach(commanders, modUnit);
+//					//----------------------------------------------------------
+//                    var weaps =
+//                    [
+//                        '/pa/tools/uber_cannon/uber_cannon.json',
+//                        '/pa/units/commanders/base_commander/base_commander_tool_weapon.json',
+//                        //'/pa/units/commanders/base_commander/base_commander_tool_weapon_lilly.json',
+//                    ];
+//                    var modWeap = function(item)
+//                    {
+//                        modspush(item ,'ammo_capacity','multiply',0.125);
+//                        modspush(item ,'ammo_demand','multiply',0.125);
+//                        modspush(item ,'ammo_per_shot','multiply',0.125);
+//                        modspush(item ,'rate_of_fire','multiply',8.0);
+//                    };
+//                    _.forEach(weaps, modWeap);
+//					//----------------------------------------------------------
+//                    var ammos =
+//                    [
+//                        '/pa/units/commanders/base_commander/base_commander_ammo.json',
+//                        //'/pa/units/commanders/base_commander/base_commander_ammo_lilly.json',
+//                    ];
+//                    var modammo = function(item)
+//                    {
+//                        modspush(item ,'initial_velocity','multiply',2.0);
+//                        modspush(item ,'max_velocity','multiply',2.0);
+//                    };
+//                    _.forEach(ammos, modammo);
+//                    //----------------------------------------------------------
 					inventory.addMods(mods);
 					//----------------------------------------------------------
                 }
