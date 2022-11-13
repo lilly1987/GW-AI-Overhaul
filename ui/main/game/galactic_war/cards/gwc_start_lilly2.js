@@ -129,11 +129,11 @@ define([
 						//minion.commander=commander; //너무 사기됨
 						if(!_.includes(minions,minion.commander)){
 							minions.push(minion.commander);
-							console.log("lilly minion.commander : "+ minion.commander); 
+							//console.log("lilly minion.commander : "+ minion.commander); 
 						}
                         inventory.minions.push(minion);
                     });
-					console.log("lilly minions p : "+_.pairs(minions)); 
+					//console.log("lilly minions p : "+_.pairs(minions)); 
                     var minionSpecs = _.filter(_.pluck(context.minions, 'commander'));
 					//console.log('lilly minionSpecs :' + minionSpecs);
                     inventory.addUnits(minionSpecs);
@@ -153,7 +153,7 @@ define([
 						// /pa/tools/commander_build_arm/commander_build_arm.json
                         var id = newid(item) ;
 
-						console.log('lilly newBuildArm :' + id);
+						console.log('lilly id minion :' + id);
                         modspush(item ,'tools.0.spec_id','clone',id);
                         modspush(item ,'tools.0.spec_id','replace',id);
                         modspush(item ,'tools.0.spec_id','tag',' ');
@@ -215,7 +215,7 @@ define([
 						
 						// /pa/tools/commander_build_arm/commander_build_arm.json
                         var id = newid(item) ;
-						console.log('lilly id :' + id);
+						console.log('lilly id commander1 :' + id);
                         modspush(item ,'tools.0.spec_id','clone',id);
                         modspush(item ,'tools.0.spec_id','replace',id);
                         modspush(item ,'tools.0.spec_id','tag',' ');
@@ -236,7 +236,7 @@ define([
                         modspush(item ,'tools.0.spec_id','clone',id);
                         //modspush(item ,'tools.0.spec_id','tag',' ');
 						
-						console.log('lilly id4 :' + id);
+						console.log('lilly id commander2 :' + id);
                         modspush(item ,'tools','push',
 							{
 								"spec_id": id+'.player',
