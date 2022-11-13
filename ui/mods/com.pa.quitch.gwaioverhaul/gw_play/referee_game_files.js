@@ -117,15 +117,15 @@ define([
             results[filePath + tag] = data;
           },
           error: function (request, status, error) {
-            console.log(
-              "error loading spec:",
-              filePath,
-              request,
-              status,
-              error
-            );
+            //console.log(
+            //  "error loading spec:",
+            //  filePath,
+            //  request,
+            //  status,
+            //  error
+            //);
 			$.getJSON("coui:/"+ filePath).done(function (text) {
-				console.log("lilly.getJSON spec : "+_.pairs(text)); 
+				//console.log("lilly.getJSON spec : "+_.pairs(text)); 
 				try {
 				  data = JSON.parse(data);
 				} catch (e) {
@@ -228,22 +228,26 @@ define([
         return new Function("attribute", value)(attribute);
       },
       clone: function (attribute, value) {
-		console.log('lilly clone1 : '+ attribute);
-		console.log('lilly clone2 : '+ value);
-		console.log('lilly clone3 : '+ specTag);
+
+		console.log('lilly.clone : '+ attribute);
+		console.log('lilly.clone : '+ value + specTag);
+
         var loaded = load(attribute);
         if (loaded) {
           loaded = _.cloneDeep(loaded);
         }
         specs[value + specTag] = loaded || attribute;
+		return attribute;
       },
       tag: function (attribute) {
         // hack fix for mirrorMode due to the fact that
         // `attribute` was retaining the previous `specTag`s
         // and I couldn't track down why
-		console.log('lilly tag : '+ attribute);
-		console.log('lilly tag : '+ specTag);
-		var cleanAttribute=attribute;
+
+		console.log('lilly.tag : '+ attribute + specTag);
+		//console.log('lilly.tag : '+ specTag);
+		//var cleanAttribute=attribute;
+
 		//try {
 		//	cleanAttribute = attribute.slice(
 		//	  0,
@@ -252,8 +256,9 @@ define([
 		//} catch (e) {
 		//  // empty
 		//}
-		//console.log('lilly.tag : '+ cleanAttribute + specTag);
-        return cleanAttribute + specTag;
+		console.log('lilly.tag : '+ attribute + specTag);
+        //return cleanAttribute + specTag;
+        return attribute + specTag;
       },
       pull: function (attribute, value) {
         if (!_.isArray(attribute)) {
