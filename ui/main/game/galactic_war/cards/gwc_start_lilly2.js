@@ -4,11 +4,15 @@ define([
     'shared/gw_common',
     'shared/gw_factions',
     'cards/gwc_start',
+	"coui://ui/mods/com.pa.quitch.gwaioverhaul/shared/unit_groups.js",
+	"coui://ui/mods/com.pa.quitch.gwaioverhaul/shared/units.js"
 ], function(
     module,
     GW,
     GWFactions,
-    GWCStart
+    GWCStart, 
+	gwoGroup,
+	gwoUnits
 ) {
     var CARD = { id: /[^\/]+$/.exec(module.id).pop() };
 
@@ -78,11 +82,13 @@ define([
                     } ;
 					var n02=2;
 					var n04=4;
+					var n05=5;
 					var n1=10;
 					var n2=100;
 					var n25=500;
 					var n3=1000;
 					var n4=10000;
+					var n5=100000;
 					//----------------------------------------------------------
                     //modspush(
                     //    "/pa/units/orbital/orbital_launcher/orbital_launcher.json",
@@ -177,7 +183,7 @@ define([
                         modspush(id ,'pitch_rate','multiply',4);
                         modspush(id ,'yaw_range','multiply',2);
                         modspush(id ,'pitch_range','multiply',4);
-                        modspush(id ,'max_range','multiply',n02);
+                        modspush(id ,'max_range','multiply',n3);
                         modspush(id ,'assist_layers','push',"WL_Orbital");
 
                     };
@@ -233,13 +239,13 @@ define([
                         modspush(item ,'tools.0.spec_id','replace',id);
                         modspush(item ,'tools.0.spec_id','tag',' ');
 						
-                        modspush(id,'construction_demand.energy','multiply',1000);
-                        modspush(id,'construction_demand.metal','multiply',1000);
+                        modspush(id,'construction_demand.energy','multiply',n3);
+                        modspush(id,'construction_demand.metal','multiply',n3);
                         modspush(id,'yaw_rate','multiply',4);
                         modspush(id,'pitch_rate','multiply',4);
                         modspush(id,'yaw_range','multiply',2);
                         modspush(id,'pitch_range','multiply',4);
-                        modspush(id,'max_range','multiply',1000);
+                        modspush(id,'max_range','multiply',n4);
                         modspush(id,'assist_layers','push',"WL_Orbital");
                         //----------------------------------------------------------
 						/*
@@ -324,7 +330,21 @@ define([
                         modspush(item ,'initial_velocity','multiply',2.0);
                         modspush(item ,'max_velocity','multiply',2.0);
                     };
-                    _.forEach(ammos, modammo);
+                    _.forEach(ammos, modammo);					//----------------------------------------------------------
+					_.forEach([gwoGroup.navalMobile], function (item) {
+						modspush(item ,'navigation.move_speed','multiply',n05);
+						modspush(item ,'navigation.brake','multiply',n1);
+						modspush(item ,'navigation.acceleration','multiply',n1);
+						modspush(item ,'navigation.turn_speed','multiply',n1);
+					});
+					//----------------------------------------------------------
+					_.forEach([gwoUnits.nukeLauncherAmmo], function (item) {
+						modspush(item ,'damage','multiply',2);
+						modspush(item ,'splash_radius','multiply',2);
+						modspush(item ,'full_damage_splash_radius','multiply',2);
+						modspush(item ,'burn_radius','multiply',2);
+						modspush(item ,'armor_damage_map.AT_Commander','multiply',2);
+					});
                     //----------------------------------------------------------
 					inventory.addMods(mods);
 					//----------------------------------------------------------
