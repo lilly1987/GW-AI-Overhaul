@@ -330,14 +330,15 @@ define([
                         modspush(item ,'initial_velocity','multiply',2.0);
                         modspush(item ,'max_velocity','multiply',2.0);
                     };
-                    _.forEach(ammos, modammo);					//----------------------------------------------------------
-					_.forEach([gwoGroup.navalMobile], function (item) {
-						modspush(item ,'navigation.move_speed','multiply',n05);
-						modspush(item ,'navigation.brake','multiply',n1);
-						modspush(item ,'navigation.acceleration','multiply',n1);
-						modspush(item ,'navigation.turn_speed','multiply',n1);
-					});
+                    _.forEach(ammos, modammo);
 					//----------------------------------------------------------
+					_.forEach([gwoGroup.navalMobile], function (item) {
+						modspush(item ,'navigation.move_speed','multiply',4);
+						modspush(item ,'navigation.brake','multiply',4);
+						modspush(item ,'navigation.acceleration','multiply',4);
+						modspush(item ,'navigation.turn_speed','multiply',4);
+					});
+					//--------------------------- nukeLauncherAmmo -------------------------------
 					_.forEach([gwoUnits.nukeLauncherAmmo], function (item) {
 						modspush(item ,'damage','multiply',2);
 						modspush(item ,'splash_radius','multiply',2);
