@@ -5,15 +5,18 @@ define([
     'shared/gw_factions',
     'cards/gwc_start',
 	"coui://ui/mods/com.pa.quitch.gwaioverhaul/shared/unit_groups.js",
-	"coui://ui/mods/com.pa.quitch.gwaioverhaul/shared/units.js"
+	"coui://ui/mods/com.pa.quitch.gwaioverhaul/shared/units.js",
+	"coui://ui/mods/com.pa.quitch.gwaioverhaul/shared/ai.js"
 ], function(
     module,
     GW,
     GWFactions,
     GWCStart, 
 	gwoGroup,
-	gwoUnits
+	gwoUnits,
+	gwoAI
 ) {
+	var gwoUnit=gwoUnits;
     var CARD = { id: /[^\/]+$/.exec(module.id).pop() };
 
     return {
@@ -145,6 +148,12 @@ define([
 						//minion.personality.metal_demand_check=0.5;
 						//minion.personality.energy_demand_check=0.5;
 						minion.personality.personality_tags=_.pull(minion.personality.personality_tags, 'SlowerExpansion');
+						minion.personality.personality_tags.push("ffa");
+						minion.personality.personality_tags.push("queller");
+						minion.personality.personality_tags =
+									minion.personality.personality_tags.concat(
+										gwoAI.penchants().penchants
+									);
 						//minion.commander=commander; //너무 사기됨
 						if(!_.includes(minions,minion.commander)){
 							minions.push(minion.commander);
@@ -161,6 +170,11 @@ define([
 					var modUnit = function(item)
                     {
 						console.log("lillt item : "+ item); 
+						modspush(item ,'navigation.type','replace',"air");
+                        modspush(item ,'navigation.inter_planetary_type','replace',"system");
+						modspush(item ,'system_velocity_multiplier','replace',60);
+						modspush(item ,'gravwell_velocity_multiplier','replace',20);
+						
                         modspush(item ,'navigation.move_speed','multiply',n02);
                         modspush(item ,'navigation.turn_speed','multiply',n02);
                         modspush(item ,'max_health','multiply',n1);
@@ -199,6 +213,11 @@ define([
 						//'( CmdBuild | Factory| FactoryBuild | Important | FabBuild | FabAdvBuild)'
 						//'- CombatFabBuild - FabBuild '
 						);
+						modspush(item ,'navigation.type','replace',"air");
+						modspush(item ,'navigation.inter_planetary_type','replace',"system");
+						modspush(item ,'system_velocity_multiplier','replace',60);
+						modspush(item ,'gravwell_velocity_multiplier','replace',20);
+						
                         modspush(item ,'navigation.move_speed','multiply',n1);
                         modspush(item ,'navigation.turn_speed','multiply',n1);
                         modspush(item ,'max_health','multiply',n1);
@@ -345,6 +364,83 @@ define([
 						modspush(item ,'full_damage_splash_radius','multiply',2);
 						modspush(item ,'burn_radius','multiply',2);
 						modspush(item ,'armor_damage_map.AT_Commander','multiply',2);
+					});
+                    //----------------------------------------------------------
+					  var smallStructures = [
+						gwoUnit.energyPlant,
+						gwoUnit.energyStorage,
+						gwoUnit.galata,
+						gwoUnit.landMine,
+						gwoUnit.metalStorage,
+						gwoUnit.pelter,
+						gwoUnit.radar,
+						gwoUnit.singleLaserDefenseTower,
+						gwoUnit.torpedoLauncher,
+						gwoUnit.wall,
+					  ];
+					  var mediumStructures = [
+						gwoUnit.catapult,
+						gwoUnit.energyPlantAdvanced,
+						gwoUnit.flak,
+						gwoUnit.laserDefenseTower,
+						gwoUnit.laserDefenseTowerAdvanced,
+						gwoUnit.torpedoLauncherAdvanced,
+						gwoUnit.umbrella,
+					  ];
+					  var largeStructures = [
+						//gwoUnit.anchor,
+						gwoUnit.deepSpaceOrbitalRadar,
+						gwoUnit.holkins,
+						//gwoUnit.jig,
+						gwoUnit.radarAdvanced,
+					  ];
+					  var groundStructures = smallStructures.concat(
+						mediumStructures,
+						largeStructures
+					  );
+					_.forEach(groundStructures, function (item) {
+						modspush(item ,'base_spec','replace',"/pa/units/land/base_vehicle/base_vehicle.json");
+						modspush(item ,'navigation.type','replace',"Hover");
+						modspush(item ,'navigation.acceleration','replace',100);
+						modspush(item ,'navigation.brake','replace',100);
+						modspush(item ,'navigation.move_speed','replace',100);
+						modspush(item ,'navigation.turn_speed','replace',100);
+						modspush(item ,'navigation.allow_pushing','replace',true);
+						modspush(item ,'navigation.push_sideways','replace',true);
+					});
+					var orbitalStructures = [gwoUnit.anchor, gwoUnit.jig];
+					_.forEach(orbitalStructures, function (item) {
+						modspush(item ,'base_spec','replace',"/pa/units/orbital/base_orbital/base_orbital.json");
+						modspush(item ,'navigation.acceleration','replace',100);
+						modspush(item ,'navigation.brake','replace',100);
+						modspush(item ,'navigation.move_speed','replace',100);
+						modspush(item ,'navigation.turn_speed','replace',100);
+					});
+					  var allStructures = groundStructures.concat(
+						orbitalStructures
+					  );
+					_.forEach(allStructures, function (item) {
+						modspush(item ,'physics.type','replace',"Mobile");
+						modspush(item ,'command_caps','replace',["ORDER_Move", "ORDER_Patrol", "ORDER_Assist"]);
+						modspush(item ,'unit_types','pull',"UNITTYPE_Structure");
+						modspush(item ,'unit_types','push',"UNITTYPE_Mobile");
+					});
+					var teleportableStructures = smallStructures.concat(mediumStructures);
+					_.forEach(teleportableStructures, function (item) {
+						modspush(item ,'teleportable','replace',{});
+						modspush(item ,'command_caps','push',"ORDER_Use");
+					});
+					  var defensiveStructures = gwoGroup.structuresArtillery.concat(
+						gwoGroup.structuresDefences
+					  );
+					  var offensiveStructures = _.filter(
+						defensiveStructures,
+						function (structure) {
+						  return structure !== gwoUnit.wall;
+						}
+					  );
+					_.forEach(offensiveStructures, function (item) {
+						modspush(item ,'command_caps','push',"ORDER_Attack");
 					});
                     //----------------------------------------------------------
 					inventory.addMods(mods);
