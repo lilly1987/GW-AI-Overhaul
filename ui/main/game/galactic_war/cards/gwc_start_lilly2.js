@@ -6,7 +6,8 @@ define([
     'cards/gwc_start',
 	"coui://ui/mods/com.pa.quitch.gwaioverhaul/shared/unit_groups.js",
 	"coui://ui/mods/com.pa.quitch.gwaioverhaul/shared/units.js",
-	"coui://ui/mods/com.pa.quitch.gwaioverhaul/shared/ai.js"
+	"coui://ui/mods/com.pa.quitch.gwaioverhaul/shared/ai.js",
+	"coui://ui/mods/com.pa.quitch.gwaioverhaul/shared/cards.js"
 ], function(
     module,
     GW,
@@ -14,7 +15,8 @@ define([
     GWCStart, 
 	gwoGroup,
 	gwoUnits,
-	gwoAI
+	gwoAI,
+	gwoCard
 ) {
 	var gwoUnit=gwoUnits;
     var CARD = { id: /[^\/]+$/.exec(module.id).pop() };
@@ -277,9 +279,10 @@ define([
 						console.log('lilly id commander2 :' + id);
                         modspush(item ,'tools','push',
 							{
-								"spec_id": id+'.player',
-								"muzzle_bone": "socket_rightMuzzle",
-								"aim_bone": "bone_turret"
+								spec_id: id+'.player',
+								aim_bone: "bone_turret",
+								muzzle_bone: "socket_rightMuzzle",
+								primary_weapon: false
 							}
 						);
                         modspush(item ,'_.slice(tools,-1)[0].spec_id','tag',' ');
@@ -291,8 +294,18 @@ define([
                         // /pa/units/commanders/base_commander/base_commander_tool_aa_weapon.json
                         var newwp = newid(item) ;
                         modspush(item ,'tools.3.spec_id','clone',newwp);
-                        modspush(item ,'tools.3.spec_id','replace',newwp);
-                        modspush(item ,'tools.3.spec_id','tag',' ');
+                        //modspush(item ,'tools.3.spec_id','replace',newwp);
+                        //modspush(item ,'tools.3.spec_id','tag',' ');
+
+						console.log('lilly id commander3 :' + newwp);
+                        modspush(item ,'tools','push',
+							{
+								spec_id: newwp+'.player',
+								aim_bone: "bone_turret",
+								muzzle_bone: "socket_rightMuzzle",
+								primary_weapon: false
+							}
+						);
 
                         modspush(newwp ,'max_range','multiply',1.5);
                         modspush(newwp ,'rate_of_fire','multiply',2);
@@ -442,6 +455,41 @@ define([
 					_.forEach(offensiveStructures, function (item) {
 						modspush(item ,'command_caps','push',"ORDER_Attack");
 					});
+                    //-------------------------Rapid Deployment Commander----gwaio_start_rapid.js-----------------------------
+					
+					modspush(gwoUnit.airFactory ,'buildable_types','replace',"(Air & Fabber & Basic & Mobile) & FactoryBuild");
+					modspush(gwoUnit.airFactoryAdvanced ,'buildable_types','replace',"(Air & Fabber & Mobile) & FactoryBuild");
+					modspush(gwoUnit.botFactory ,'buildable_types','replace',"(Bot & Fabber & Basic & Mobile) & FactoryBuild");
+					modspush(gwoUnit.botFactoryAdvanced ,'buildable_types','replace',"(Bot & Fabber & Mobile) & FactoryBuild");
+					modspush(gwoUnit.vehicleFactory ,'buildable_types','replace',"(Tank & Fabber & Basic & Mobile) & FactoryBuild");
+					modspush(gwoUnit.vehicleFactoryAdvanced ,'buildable_types','replace',"(Tank & Fabber & Mobile) & FactoryBuild");
+					modspush(gwoUnit.navalFactory ,'buildable_types','replace',"(Naval & Fabber & Basic & Mobile) & FactoryBuild");
+					modspush(gwoUnit.navalFactoryAdvanced ,'buildable_types','replace',"(Naval & Fabber & Mobile) & FactoryBuild");
+					modspush(gwoUnit.orbitalLauncher ,'buildable_types','replace',"(Orbital & Fabber & Basic & Mobile) & FactoryBuild");
+					modspush(gwoUnit.orbitalFactory ,'buildable_types','replace',"(Orbital & Fabber & Basic & Mobile) & FactoryBuild");
+					modspush(gwoUnit.airFabber ,'buildable_types','replace',"Mobile & Basic & Air | Land & Structure & Basic - Factory | Factory & Advanced & Air | FabBuild - Factory");
+					modspush(gwoUnit.airFabberAdvanced ,'buildable_types','replace',"Mobile & Air | Land & Structure & Advanced - Factory | FabAdvBuild | FabBuild - Factory | Titan & Air");
+					modspush(gwoUnit.botFabber ,'buildable_types','replace',"Mobile & Basic & Bot | Land & Structure & Basic - Factory | Factory & Advanced & Bot & Land | FabBuild - Factory");
+					modspush(gwoUnit.botFabberAdvanced ,'buildable_types','replace',"Mobile & Bot | Land & Structure & Advanced - Factory | FabAdvBuild | FabBuild - Factory | Titan & Bot");
+					modspush(gwoUnit.colonel ,'buildable_types','replace',"Mobile & Bot | Land & Structure & Advanced - Factory | FabAdvBuild | FabBuild - Factory | Titan & Bot");
+					modspush(gwoUnit.vehicleFabber ,'buildable_types','replace',"Mobile & Basic & Tank | Land & Structure & Basic - Factory | Factory & Land & Tank & Advanced | FabBuild - Factory");
+					modspush(gwoUnit.vehicleFabberAdvanced ,'buildable_types','replace',"Mobile & Tank | Structure & Land & Advanced - Factory | FabAdvBuild | FabBuild - Factory | Titan & (Tank | Naval)");
+					modspush(gwoUnit.navalFabber ,'buildable_types','replace',"Mobile & Basic & Naval | Naval & Structure & Basic - Factory | Naval & Factory & Advanced | FabBuild - Factory");
+					modspush(gwoUnit.navalFabberAdvanced ,'buildable_types','replace',"Mobile & Naval | Naval & Structure & Advanced - Factory | FabAdvBuild | FabBuild - Factory");
+					
+					modspush(gwoUnit.barracuda ,'spawn_layers','replace',"WL_DeepWater");
+					modspush(gwoUnit.kraken ,'spawn_layers','replace',"WL_DeepWater");
+					modspush(gwoUnit.kestrel ,'spawn_layers','replace',"WL_LandHorizontal");
+					modspush("/pa/units/orbital/base_orbital/base_orbital.json" ,'spawn_layers','replace',"WL_Orbital");
+					
+					if (
+						gwoCard.hasUnit(inventory.units(), gwoUnit.orbitalLauncher) ||
+						inventory.hasCard("gwaio_upgrade_orbitallauncher")
+					) {
+						modspush(gwoUnit.orbitalFabber ,'buildable_types','replace',"Orbital & FactoryBuild | FabOrbBuild - Factory");
+					} else {
+						modspush(gwoUnit.orbitalFabber ,'buildable_types','replace',"Orbital & FactoryBuild & Basic | FabOrbBuild - Factory");
+					}
                     //----------------------------------------------------------
 					inventory.addMods(mods);
 					//----------------------------------------------------------
