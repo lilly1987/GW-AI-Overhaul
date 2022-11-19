@@ -433,6 +433,7 @@ define([
 						orbitalStructures
 					  );
 					_.forEach(allStructures, function (item) {
+						modspush(item ,'physics.radius','replace',5);
 						modspush(item ,'physics.type','replace',"Mobile");
 						modspush(item ,'command_caps','replace',["ORDER_Move", "ORDER_Patrol", "ORDER_Assist"]);
 						modspush(item ,'unit_types','pull',"UNITTYPE_Structure");
