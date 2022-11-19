@@ -371,14 +371,14 @@ define([
 						modspush(item ,'navigation.turn_speed','multiply',4);
 					});
 					//--------------------------- nukeLauncherAmmo -------------------------------
-					_.forEach([gwoUnits.nukeLauncherAmmo], function (item) {
-						modspush(item ,'damage','multiply',2);
-						modspush(item ,'splash_radius','multiply',2);
-						modspush(item ,'full_damage_splash_radius','multiply',2);
-						modspush(item ,'burn_radius','multiply',2);
-						modspush(item ,'armor_damage_map.AT_Commander','multiply',2);
-					});
-                    //----------------------------------------------------------
+					//_.forEach([gwoUnits.nukeLauncherAmmo], function (item) {
+					//	modspush(item ,'damage','multiply',2);
+					//	modspush(item ,'splash_radius','multiply',2);
+					//	modspush(item ,'full_damage_splash_radius','multiply',2);
+					//	modspush(item ,'burn_radius','multiply',2);
+					//	modspush(item ,'armor_damage_map.AT_Commander','multiply',2);
+					//});
+                    //----------------------Nomad Commander------------gwaio_start_nomad.js------------------------
 					  var smallStructures = [
 						gwoUnit.energyPlant,
 						gwoUnit.energyStorage,
@@ -457,39 +457,61 @@ define([
 					});
                     //-------------------------Rapid Deployment Commander----gwaio_start_rapid.js-----------------------------
 					
-					modspush(gwoUnit.airFactory ,'buildable_types','replace',"(Air & Fabber & Basic & Mobile) & FactoryBuild");
-					modspush(gwoUnit.airFactoryAdvanced ,'buildable_types','replace',"(Air & Fabber & Mobile) & FactoryBuild");
-					modspush(gwoUnit.botFactory ,'buildable_types','replace',"(Bot & Fabber & Basic & Mobile) & FactoryBuild");
-					modspush(gwoUnit.botFactoryAdvanced ,'buildable_types','replace',"(Bot & Fabber & Mobile) & FactoryBuild");
-					modspush(gwoUnit.vehicleFactory ,'buildable_types','replace',"(Tank & Fabber & Basic & Mobile) & FactoryBuild");
-					modspush(gwoUnit.vehicleFactoryAdvanced ,'buildable_types','replace',"(Tank & Fabber & Mobile) & FactoryBuild");
-					modspush(gwoUnit.navalFactory ,'buildable_types','replace',"(Naval & Fabber & Basic & Mobile) & FactoryBuild");
-					modspush(gwoUnit.navalFactoryAdvanced ,'buildable_types','replace',"(Naval & Fabber & Mobile) & FactoryBuild");
-					modspush(gwoUnit.orbitalLauncher ,'buildable_types','replace',"(Orbital & Fabber & Basic & Mobile) & FactoryBuild");
-					modspush(gwoUnit.orbitalFactory ,'buildable_types','replace',"(Orbital & Fabber & Basic & Mobile) & FactoryBuild");
-					modspush(gwoUnit.airFabber ,'buildable_types','replace',"Mobile & Basic & Air | Land & Structure & Basic - Factory | Factory & Advanced & Air | FabBuild - Factory");
-					modspush(gwoUnit.airFabberAdvanced ,'buildable_types','replace',"Mobile & Air | Land & Structure & Advanced - Factory | FabAdvBuild | FabBuild - Factory | Titan & Air");
-					modspush(gwoUnit.botFabber ,'buildable_types','replace',"Mobile & Basic & Bot | Land & Structure & Basic - Factory | Factory & Advanced & Bot & Land | FabBuild - Factory");
-					modspush(gwoUnit.botFabberAdvanced ,'buildable_types','replace',"Mobile & Bot | Land & Structure & Advanced - Factory | FabAdvBuild | FabBuild - Factory | Titan & Bot");
-					modspush(gwoUnit.colonel ,'buildable_types','replace',"Mobile & Bot | Land & Structure & Advanced - Factory | FabAdvBuild | FabBuild - Factory | Titan & Bot");
-					modspush(gwoUnit.vehicleFabber ,'buildable_types','replace',"Mobile & Basic & Tank | Land & Structure & Basic - Factory | Factory & Land & Tank & Advanced | FabBuild - Factory");
-					modspush(gwoUnit.vehicleFabberAdvanced ,'buildable_types','replace',"Mobile & Tank | Structure & Land & Advanced - Factory | FabAdvBuild | FabBuild - Factory | Titan & (Tank | Naval)");
-					modspush(gwoUnit.navalFabber ,'buildable_types','replace',"Mobile & Basic & Naval | Naval & Structure & Basic - Factory | Naval & Factory & Advanced | FabBuild - Factory");
-					modspush(gwoUnit.navalFabberAdvanced ,'buildable_types','replace',"Mobile & Naval | Naval & Structure & Advanced - Factory | FabAdvBuild | FabBuild - Factory");
+					//modspush(gwoUnit.airFactory ,'buildable_types','replace',"(Basic & Mobile) & FactoryBuild");
+					//modspush(gwoUnit.airFactoryAdvanced ,'buildable_types','replace',"(Mobile) & FactoryBuild");
+					//modspush(gwoUnit.botFactory ,'buildable_types','replace',"(Basic & Mobile) & FactoryBuild");
+					//modspush(gwoUnit.botFactoryAdvanced ,'buildable_types','replace',"(Mobile) & FactoryBuild");
+					//modspush(gwoUnit.vehicleFactory ,'buildable_types','replace',"( Basic & Mobile) & FactoryBuild");
+					//modspush(gwoUnit.vehicleFactoryAdvanced ,'buildable_types','replace',"( Mobile) & FactoryBuild");
+					//modspush(gwoUnit.navalFactory ,'buildable_types','replace',"(Basic & Mobile) & FactoryBuild");
+					//modspush(gwoUnit.navalFactoryAdvanced ,'buildable_types','replace',"( Mobile) & FactoryBuild");
+					//modspush(gwoUnit.orbitalLauncher ,'buildable_types','replace',"( Basic & Mobile) & FactoryBuild");
+					//modspush(gwoUnit.orbitalFactory ,'buildable_types','replace',"( Mobile) & FactoryBuild");
+					//
+					//modspush(gwoUnit.airFabber ,'buildable_types','replace',"Mobile & Basic & Air | Land & Structure & Basic - Factory | Factory & Advanced & Air | FabBuild - Factory");
+					//modspush(gwoUnit.airFabberAdvanced ,'buildable_types','replace',"Mobile & Air | Land & Structure & Advanced - Factory | FabAdvBuild | FabBuild - Factory | Titan & Air");
+					//modspush(gwoUnit.botFabber ,'buildable_types','replace',"Mobile & Basic & Bot | Land & Structure & Basic - Factory | Factory & Advanced & Bot & Land | FabBuild - Factory");
+					//modspush(gwoUnit.botFabberAdvanced ,'buildable_types','replace',"Mobile & Bot | Land & Structure & Advanced - Factory | FabAdvBuild | FabBuild - Factory | Titan & Bot");
+					//modspush(gwoUnit.colonel ,'buildable_types','replace',"Mobile & Bot | Land & Structure & Advanced - Factory | FabAdvBuild | FabBuild - Factory | Titan & Bot");
+					//modspush(gwoUnit.vehicleFabber ,'buildable_types','replace',"Mobile & Basic & Tank | Land & Structure & Basic - Factory | Factory & Land & Tank & Advanced | FabBuild - Factory");
+					//modspush(gwoUnit.vehicleFabberAdvanced ,'buildable_types','replace',"Mobile & Tank | Structure & Land & Advanced - Factory | FabAdvBuild | FabBuild - Factory | Titan & (Tank | Naval)");
+					//modspush(gwoUnit.navalFabber ,'buildable_types','replace',"Mobile & Basic & Naval | Naval & Structure & Basic - Factory | Naval & Factory & Advanced | FabBuild - Factory");
+					//modspush(gwoUnit.navalFabberAdvanced ,'buildable_types','replace',"Mobile & Naval | Naval & Structure & Advanced - Factory | FabAdvBuild | FabBuild - Factory");
 					
-					modspush(gwoUnit.barracuda ,'spawn_layers','replace',"WL_DeepWater");
-					modspush(gwoUnit.kraken ,'spawn_layers','replace',"WL_DeepWater");
-					modspush(gwoUnit.kestrel ,'spawn_layers','replace',"WL_LandHorizontal");
-					modspush("/pa/units/orbital/base_orbital/base_orbital.json" ,'spawn_layers','replace',"WL_Orbital");
+					//modspush(gwoUnit.airFactory ,'buildable_types','replace',"(Air & Fabber & Basic & Mobile) & FactoryBuild");
+					//modspush(gwoUnit.airFactoryAdvanced ,'buildable_types','replace',"(Air & Fabber & Mobile) & FactoryBuild");
+					//modspush(gwoUnit.botFactory ,'buildable_types','replace',"(Bot & Fabber & Basic & Mobile) & FactoryBuild");
+					//modspush(gwoUnit.botFactoryAdvanced ,'buildable_types','replace',"(Bot & Fabber & Mobile) & FactoryBuild");
+					//modspush(gwoUnit.vehicleFactory ,'buildable_types','replace',"(Tank & Fabber & Basic & Mobile) & FactoryBuild");
+					//modspush(gwoUnit.vehicleFactoryAdvanced ,'buildable_types','replace',"(Tank & Fabber & Mobile) & FactoryBuild");
+					//modspush(gwoUnit.navalFactory ,'buildable_types','replace',"(Naval & Fabber & Basic & Mobile) & FactoryBuild");
+					//modspush(gwoUnit.navalFactoryAdvanced ,'buildable_types','replace',"(Naval & Fabber & Mobile) & FactoryBuild");
+					//modspush(gwoUnit.orbitalLauncher ,'buildable_types','replace',"(Orbital & Fabber & Basic & Mobile) & FactoryBuild");
+					//modspush(gwoUnit.orbitalFactory ,'buildable_types','replace',"(Orbital & Fabber & Basic & Mobile) & FactoryBuild");
 					
-					if (
-						gwoCard.hasUnit(inventory.units(), gwoUnit.orbitalLauncher) ||
-						inventory.hasCard("gwaio_upgrade_orbitallauncher")
-					) {
-						modspush(gwoUnit.orbitalFabber ,'buildable_types','replace',"Orbital & FactoryBuild | FabOrbBuild - Factory");
-					} else {
-						modspush(gwoUnit.orbitalFabber ,'buildable_types','replace',"Orbital & FactoryBuild & Basic | FabOrbBuild - Factory");
-					}
+					//modspush(gwoUnit.airFabber ,'buildable_types','replace',"Mobile & Basic & Air | Land & Structure & Basic - Factory | Factory & Advanced & Air | FabBuild - Factory");
+					//modspush(gwoUnit.airFabberAdvanced ,'buildable_types','replace',"Mobile & Air | Land & Structure & Advanced - Factory | FabAdvBuild | FabBuild - Factory | Titan & Air");
+					//modspush(gwoUnit.botFabber ,'buildable_types','replace',"Mobile & Basic & Bot | Land & Structure & Basic - Factory | Factory & Advanced & Bot & Land | FabBuild - Factory");
+					//modspush(gwoUnit.botFabberAdvanced ,'buildable_types','replace',"Mobile & Bot | Land & Structure & Advanced - Factory | FabAdvBuild | FabBuild - Factory | Titan & Bot");
+					//modspush(gwoUnit.colonel ,'buildable_types','replace',"Mobile & Bot | Land & Structure & Advanced - Factory | FabAdvBuild | FabBuild - Factory | Titan & Bot");
+					//modspush(gwoUnit.vehicleFabber ,'buildable_types','replace',"Mobile & Basic & Tank | Land & Structure & Basic - Factory | Factory & Land & Tank & Advanced | FabBuild - Factory");
+					//modspush(gwoUnit.vehicleFabberAdvanced ,'buildable_types','replace',"Mobile & Tank | Structure & Land & Advanced - Factory | FabAdvBuild | FabBuild - Factory | Titan & (Tank | Naval)");
+					//modspush(gwoUnit.navalFabber ,'buildable_types','replace',"Mobile & Basic & Naval | Naval & Structure & Basic - Factory | Naval & Factory & Advanced | FabBuild - Factory");
+					//modspush(gwoUnit.navalFabberAdvanced ,'buildable_types','replace',"Mobile & Naval | Naval & Structure & Advanced - Factory | FabAdvBuild | FabBuild - Factory");
+					
+					//modspush(gwoUnit.barracuda ,'spawn_layers','replace',"WL_DeepWater");
+					//modspush(gwoUnit.kraken ,'spawn_layers','replace',"WL_DeepWater");
+					//modspush(gwoUnit.kestrel ,'spawn_layers','replace',"WL_LandHorizontal");
+					//modspush("/pa/units/orbital/base_orbital/base_orbital.json" ,'spawn_layers','replace',"WL_Orbital");
+					//
+					//if (
+					//	gwoCard.hasUnit(inventory.units(), gwoUnit.orbitalLauncher) ||
+					//	inventory.hasCard("gwaio_upgrade_orbitallauncher")
+					//) {
+					//	modspush(gwoUnit.orbitalFabber ,'buildable_types','replace',"Orbital & FactoryBuild | FabOrbBuild - Factory");
+					//} else {
+					//	modspush(gwoUnit.orbitalFabber ,'buildable_types','replace',"Orbital & FactoryBuild & Basic | FabOrbBuild - Factory");
+					//}
                     //----------------------------------------------------------
 					inventory.addMods(mods);
 					//----------------------------------------------------------
