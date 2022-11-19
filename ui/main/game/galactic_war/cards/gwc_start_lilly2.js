@@ -215,8 +215,8 @@ define([
 						);
 						modspush(item ,'navigation.type','replace',"air");
 						modspush(item ,'navigation.inter_planetary_type','replace',"system");
-						modspush(item ,'system_velocity_multiplier','replace',60);
-						modspush(item ,'gravwell_velocity_multiplier','replace',20);
+						modspush(item ,'system_velocity_multiplier','replace',120);
+						modspush(item ,'gravwell_velocity_multiplier','replace',40);
 						
                         modspush(item ,'navigation.move_speed','multiply',n1);
                         modspush(item ,'navigation.turn_speed','multiply',n1);
