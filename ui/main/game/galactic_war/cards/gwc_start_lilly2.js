@@ -378,6 +378,11 @@ define([
 					//	modspush(item ,'burn_radius','multiply',2);
 					//	modspush(item ,'armor_damage_map.AT_Commander','multiply',2);
 					//});
+					//-------------------------catapult---------------------------------
+					modspush(gwoUnit.catapultWeapon,'target_layers','push',"WL_Air");
+					modspush(gwoUnit.catapultAmmo,'splash_damage','replace',100);
+					modspush(gwoUnit.catapultAmmo,'splash_radius','replace',5);
+					modspush(gwoUnit.catapultAmmo,'max_velocity','multiply',4);
                     //----------------------Nomad Commander------------gwaio_start_nomad.js------------------------
 					  var smallStructures = [
 						gwoUnit.energyPlant,
@@ -416,8 +421,8 @@ define([
 						modspush(item ,'navigation.type','replace',"Hover");
 						modspush(item ,'navigation.acceleration','replace',100);
 						modspush(item ,'navigation.brake','replace',100);
-						modspush(item ,'navigation.move_speed','replace',100);
-						modspush(item ,'navigation.turn_speed','replace',100);
+						modspush(item ,'navigation.move_speed','replace',50);
+						modspush(item ,'navigation.turn_speed','replace',90);
 						modspush(item ,'navigation.allow_pushing','replace',true);
 						modspush(item ,'navigation.push_sideways','replace',true);
 					});
@@ -426,19 +431,23 @@ define([
 						modspush(item ,'base_spec','replace',"/pa/units/orbital/base_orbital/base_orbital.json");
 						modspush(item ,'navigation.acceleration','replace',100);
 						modspush(item ,'navigation.brake','replace',100);
-						modspush(item ,'navigation.move_speed','replace',100);
-						modspush(item ,'navigation.turn_speed','replace',100);
+						modspush(item ,'navigation.move_speed','replace',50);
+						modspush(item ,'navigation.turn_speed','replace',90);
 					});
 					  var allStructures = groundStructures.concat(
 						orbitalStructures
 					  );
 					_.forEach(allStructures, function (item) {
-						modspush(item ,'physics.radius','replace',5);
 						modspush(item ,'physics.type','replace',"Mobile");
 						modspush(item ,'command_caps','replace',["ORDER_Move", "ORDER_Patrol", "ORDER_Assist"]);
 						modspush(item ,'unit_types','pull',"UNITTYPE_Structure");
 						modspush(item ,'unit_types','push',"UNITTYPE_Mobile");
+						modspush(item ,'physics.radius','replace',5);
 					});
+					_.forEach(smallStructures, function (item) {
+						modspush(item ,'teleportable','replace',{ size: 1 });
+						modspush(item ,'attachable','replace',{ offsets: { root: [0, 0, 0], head: [0, 0, 13] } });
+					});					
 					var teleportableStructures = smallStructures.concat(mediumStructures);
 					_.forEach(teleportableStructures, function (item) {
 						modspush(item ,'teleportable','replace',{});
