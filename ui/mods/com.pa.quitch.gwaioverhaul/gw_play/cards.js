@@ -20,7 +20,7 @@ if (!gwoCardsLoaded) {
           "gwaio_upgrade_fabricationvehicle",
         ];
 
-        var numCardsToOffer = 6;
+        var numCardsToOffer = 8;
 
         model.rerollTech = function () {
           var cardsOffered = 0;
