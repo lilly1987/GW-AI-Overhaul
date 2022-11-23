@@ -215,7 +215,8 @@ define([
 						//'( CmdBuild | Factory| FactoryBuild | Important | FabBuild | FabAdvBuild)'
 						//'- CombatFabBuild - FabBuild '
 						);
-						modspush(item ,'navigation.type','replace',"air");
+						//modspush(item ,'navigation.type','replace',"air");
+						modspush(item ,'navigation.type','replace',"orbital");
 						modspush(item ,'navigation.inter_planetary_type','replace',"system");
 						modspush(item ,'system_velocity_multiplier','replace',120);
 						modspush(item ,'gravwell_velocity_multiplier','replace',40);
@@ -381,7 +382,7 @@ define([
 					//-------------------------catapult---------------------------------
 					modspush(gwoUnit.catapultWeapon,'target_layers','push',"WL_Air");
 					modspush(gwoUnit.catapultAmmo,'splash_damage','replace',100);
-					modspush(gwoUnit.catapultAmmo,'splash_radius','replace',5);
+					modspush(gwoUnit.catapultAmmo,'splash_radius','replace',10);
 					modspush(gwoUnit.catapultAmmo,'max_velocity','multiply',4);
                     //----------------------Nomad Commander------------gwaio_start_nomad.js------------------------
 					  var smallStructures = [
