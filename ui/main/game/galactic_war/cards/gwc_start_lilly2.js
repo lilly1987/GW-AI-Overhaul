@@ -215,8 +215,8 @@ define([
 						//'( CmdBuild | Factory| FactoryBuild | Important | FabBuild | FabAdvBuild)'
 						//'- CombatFabBuild - FabBuild '
 						);
-						//modspush(item ,'navigation.type','replace',"air");
-						modspush(item ,'navigation.type','replace',"orbital");
+						modspush(item ,'navigation.type','replace',"air");
+						//modspush(item ,'navigation.type','replace',"orbital");
 						modspush(item ,'navigation.inter_planetary_type','replace',"system");
 						modspush(item ,'system_velocity_multiplier','replace',120);
 						modspush(item ,'gravwell_velocity_multiplier','replace',40);
