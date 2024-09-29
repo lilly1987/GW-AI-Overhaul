@@ -193,6 +193,7 @@ define([
     gwoUnit.vehicleFactoryAdvancedBuildArm,
     gwoUnit.vehicleFactoryBuildArm,
   ];
+            var mult=25.0
             var modUnit2 = function(unit)
             {
               mods.push(
@@ -202,7 +203,7 @@ define([
                     //op: "add",
                     //value: 10000.0
                     op: 'multiply',
-                    value: 100.0
+                    value: mult
                 },
                 {
                     file: unit,
@@ -210,7 +211,7 @@ define([
                     //op: "add",
                     //value: 100.0
                     op: 'multiply',
-                    value: 100.0
+                    value: mult
                 },
                 {
                   file: unit,
@@ -228,7 +229,7 @@ define([
                   file: unit,
                   path: "pitch_range",
                   op: "multiply",
-                  value: 4
+                  value: 2
                 },
                 {
                   file: unit,
@@ -240,7 +241,7 @@ define([
                   file: unit,
                   path: "max_range",
                   op: "multiply",
-                  value: 100
+                  value: mult
                 },
                 {
                   file: unit,
@@ -274,14 +275,14 @@ define([
                     file: unit,
                     path: 'production.energy',
                     op: 'multiply',
-                    value: 100.0
+                    value: mult
                 });
                 mods.push(
                 {
                     file: unit,
                     path: 'production.metal',
                     op: 'multiply',
-                    value: 100.0
+                    value: mult
                 });
             };
             _.forEach(units, modUnit);

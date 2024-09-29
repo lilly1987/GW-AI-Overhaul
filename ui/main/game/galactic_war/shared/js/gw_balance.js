@@ -5,14 +5,19 @@ define([
 ) {
 
     return {
-        initialCardSlots: 20,
+        initialCardSlots: 60,
 
         numberOfSystems: [
+                //18, // Small
+                //24, // Medium
+                //36, // Large
+                //54, // Uber
+                //78 // Rediq
                 18, // Small
-                24, // Medium
-                36, // Large
-                54, // Uber
-                78 // Rediq
+                36, // Medium
+                72, // Large
+                144, // Uber
+                288 // Rediq
         ],
 
         // New ramping feature so that the galaxy size.
