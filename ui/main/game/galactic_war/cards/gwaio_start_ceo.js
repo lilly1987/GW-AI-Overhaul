@@ -13,7 +13,7 @@ define([
       return gwoCard.loadoutIcon(CARD.id);
     },
     describe: _.constant(
-      "!LOC:Empower your subordinates and delegate your way to victory. Your commander can build Colonel proxy commanders and they are armed with Uber Cannons. Halves their cost."
+      "!LOC:부하들에게 권한을 부여하고 승리로 가는 길을 위임하세요. 지휘관은 대령 대리 지휘관을 만들 수 있으며, 그들은 우버 캐논으로 무장합니다. 비용이 반으로 줄어듭니다."
     ),
     hint: function () {
       return {

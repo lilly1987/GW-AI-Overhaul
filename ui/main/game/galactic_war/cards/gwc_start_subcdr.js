@@ -51,6 +51,7 @@ define([
           const minionSpecs = _.compact(_.pluck(context.minions, "commander"));
           inventory.addUnits(minionSpecs);
         }
+        //
         ++buffCount;
         inventory.setTag("", "buffCount", buffCount);
       } else {

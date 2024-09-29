@@ -75,6 +75,11 @@ function gwoSetup() {
           model.gwoNewStartCards = [];
         }
         model.gwoNewStartCards.push(
+        );
+        if (!model.gwoStartingCards) {
+          model.gwoStartingCards = [];
+        }
+        model.gwoStartingCards.push(
           { id: "gwaio_start_ceo" },
           { id: "gwaio_start_paratrooper" },
           { id: "nem_start_deepspace" },
@@ -89,12 +94,7 @@ function gwoSetup() {
           { id: "gwaio_start_backpacker" },
           { id: "gwaio_start_hoarder" },
           { id: "gwaio_start_warp" },
-          { id: "gwaio_start_terminal" }
-        );
-        if (!model.gwoStartingCards) {
-          model.gwoStartingCards = [];
-        }
-        model.gwoStartingCards.push(
+          { id: "gwaio_start_terminal" },
           { id: "gwc_start_artillery" },
           { id: "gwc_start_subcdr" },
           { id: "gwc_start_combatcdr" },

@@ -19,7 +19,7 @@ define([
       return gwoCard.loadoutIcon(CARD.id);
     },
     describe: _.constant(
-      "!LOC:The Commander can mass teleport itself and all units within weapons range to anywhere in the system, but they are highly vulnerable to attack afterwards."
+      "!LOC:사령관은 무기 범위 내에 있는 자신과 모든 유닛을 시스템 내 어디든지 대량 순간이동시킬 수 있지만 이후 공격에 매우 취약합니다."
     ),
     hint: function () {
       return {

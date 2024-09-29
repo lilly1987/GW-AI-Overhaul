@@ -14,7 +14,7 @@ define([
       return gwoCard.loadoutIcon(CARD.id);
     },
     describe: _.constant(
-      "!LOC:You're dying, but you have one last war left in you. Your units' health decreases over time, and your commander's fastest of all. Life is short and must be lived to the full, so unit damage and movement is doubled and costs are halved. Life through victory, Commander!"
+      "!LOC:당신은 죽어가고 있지만, 당신에게는 마지막 전쟁이 남았습니다. 당신의 유닛의 체력은 시간이 지남에 따라 감소하고, 당신의 지휘관의 체력은 가장 빠릅니다. 인생은 짧고 최대한 살아야 하므로, 유닛의 피해와 이동은 두 배가 되고 비용은 반으로 줄어듭니다. 승리로 생명을 얻으세요, 지휘관님!"
     ),
     hint: function () {
       return {

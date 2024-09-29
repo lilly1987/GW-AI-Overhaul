@@ -1,9 +1,11 @@
 define([
+    "shared/gw_factions",
   "shared/gw_common",
   "coui://ui/mods/com.pa.quitch.gwaioverhaul/shared/units.js",
   "coui://ui/mods/com.pa.quitch.gwaioverhaul/shared/unit_groups.js",
   "coui://ui/mods/com.pa.quitch.gwaioverhaul/faction/cluster_setup.js",
-], function (GW, gwoUnit, gwoGroup, gwoCluster) {
+  "cards/gwc_minion",
+], function (GWFactions,GW, gwoUnit, gwoGroup, gwoCluster,gwc_minion) {
   return {
     visible: _.constant(false),
     summarize: _.constant("!LOC:Default Commander"),
@@ -32,6 +34,151 @@ define([
         commander
       );
       inventory.addUnits(starterUnits);
+          
+            //
+     //_.times(3, function () {
+     // const minion = _.cloneDeep(_.sample(GWFactions[inventory.getTag("global", "playerFaction")].minions));
+     // inventory.minions.push(minion);
+     // if (minion.commander) {
+     //   inventory.addUnits([minion.commander]);
+     // }
+     //}
+          //
+          inventory.addUnits(
+            gwoGroup.air.concat(
+              gwoGroup.bots,
+              gwoGroup.naval,
+              gwoGroup.orbital,
+              gwoGroup.vehicles,
+              
+              gwoGroup.units,
+              gwoGroup.titans
+              
+            )
+          );
+
+          //
+          const mods = [
+            {
+              file: gwoUnit.commander,
+              path: "navigation.move_speed",
+              op: "multiply",
+              value: 5,
+            },
+            {
+              file: gwoUnit.commander,
+              path: "navigation.brake",
+              op: "multiply",
+              value: 5,
+            },
+            {
+              file: gwoUnit.commander,
+              path: "navigation.acceleration",
+              op: "multiply",
+              value: 5,
+            },
+            {
+              file: gwoUnit.commander,
+              path: "navigation.turn_speed",
+              op: "multiply",
+              value: 5,
+            },
+            {
+              file: gwoUnit.commander,
+              path: "max_health",
+              op: "multiply",
+              value: 10,
+            },
+            {
+              file: gwoUnit.commander,
+              path: "production.energy",
+              op: "multiply",
+              value: 10,
+            },
+            {
+              file: gwoUnit.commander,
+              path: "production.metal",
+              op: "multiply",
+              value: 10,
+            },
+            {
+              file: gwoUnit.commander,
+              path: "storage.energy",
+              op: "multiply",
+              value: 10,
+            },
+            {
+              file: gwoUnit.commander,
+              path: "storage.metal",
+              op: "multiply",
+              value: 10,
+            },
+            {
+              file: gwoUnit.colonel,
+              path: "max_health",
+              op: "multiply",
+              value: 10,
+            },
+          ];
+          const weapons = [gwoUnit.commanderSecondary, gwoUnit.commanderWeapon];
+          _.forEach(weapons, function (weapon) {
+            mods.push(
+              {
+                file: weapon,
+                path: "ammo_capacity",
+                op: "multiply",
+                value: 0.25,
+              },
+              {
+                file: weapon,
+                path: "ammo_demand",
+                op: "multiply",
+                value: 0.25,
+              },
+              {
+                file: weapon,
+                path: "ammo_per_shot",
+                op: "multiply",
+                value: 0.25,
+              },
+              {
+                file: weapon,
+                path: "rate_of_fire",
+                op: "multiply",
+                value: 2.0,
+              }
+            );
+          });
+          //
+            var units =
+            [
+                '/pa/units/land/energy_plant/energy_plant.json',
+                '/pa/units/land/energy_plant_adv/energy_plant_adv.json',
+                '/pa/units/land/metal_extractor/metal_extractor.json',
+                '/pa/units/land/metal_extractor_adv/metal_extractor_adv.json',
+                '/pa/units/orbital/mining_platform/mining_platform.json',
+            ];
+            var modUnit = function(unit)
+            {
+                mods.push(
+                {
+                    file: unit,
+                    path: 'production.energy',
+                    op: 'multiply',
+                    value: 10.0
+                });
+                mods.push(
+                {
+                    file: unit,
+                    path: 'production.metal',
+                    op: 'multiply',
+                    value: 10.0
+                });
+            };
+            _.forEach(units, modUnit);
+          //
+          inventory.addMods(mods);
+          //
     },
     dull: function () {},
   };
