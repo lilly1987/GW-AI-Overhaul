@@ -95,6 +95,11 @@ function gwoSetup() {
           model.gwoStartingCards = [];
         }
         model.gwoStartingCards.push(
+          { id: "gwc_start_artillery" },
+          { id: "gwc_start_subcdr" },
+          { id: "gwc_start_combatcdr" },
+          { id: "gwc_start_allfactory" },
+          { id: "gwc_start_storage" },
           { id: "gwc_start_vehicle" },
           { id: "gwc_start_air" },
           { id: "gwc_start_orbital" },
@@ -102,11 +107,6 @@ function gwoSetup() {
           { id: "gwaio_start_naval" }
         );
         const lockedBaseCards = [
-          { id: "gwc_start_artillery" },
-          { id: "gwc_start_subcdr" },
-          { id: "gwc_start_combatcdr" },
-          { id: "gwc_start_allfactory" },
-          { id: "gwc_start_storage" },
         ];
         const allCards = model.gwoStartingCards.concat(
           lockedBaseCards,

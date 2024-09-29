@@ -599,7 +599,7 @@ function gwoCard() {
             !cards[0].minions
           ) {
             const ai = gwoSettings && gwoSettings.ai;
-            _.times(2, function () {
+            _.times(4, function () {
               const subcommander = _.cloneDeep(
                 _.sample(GWFactions[playerFaction].minions)
               );
