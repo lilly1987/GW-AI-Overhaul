@@ -91,12 +91,6 @@ define([
             },
             {
               file: gwoUnit.commander,
-              path: "max_health",
-              op: "multiply",
-              value: 10,
-            },
-            {
-              file: gwoUnit.commander,
               path: "storage.energy",
               op: "multiply",
               value: 2,
@@ -108,46 +102,10 @@ define([
               value: 2,
             },
             {
-              file: gwoUnit.commanderBuildArm,
-              path: "yaw_rate",
-              op: "multiply",
-              value: 2,
-            },
-            {
-              file: gwoUnit.commanderBuildArm,
-              path: "pitch_rate",
-              op: "multiply",
-              value: 2,
-            },
-            {
-              file: gwoUnit.commanderBuildArm,
-              path: "pitch_range",
-              op: "multiply",
-              value: 4,
-            },
-            {
-              file: gwoUnit.commanderBuildArm,
-              path: "yaw_range",
-              op: "multiply",
-              value: 2,
-            },
-            {
-              file: gwoUnit.commanderBuildArm,
-              path: "max_range",
+              file: gwoUnit.commander,
+              path: "max_health",
               op: "multiply",
               value: 100,
-            },
-            {
-              file: gwoUnit.commanderBuildArm,
-              path: "assist_layers",
-              op: "replace",
-              value: ["WL_AnyLayer"],
-            },
-            {
-              file: gwoUnit.commanderBuildArm,
-              path: "reclaim_layers",
-              op: "replace",
-              value: ["WL_AnyLayer"],
             },
             //{
             //  file: gwoUnit.commander,
@@ -237,24 +195,66 @@ define([
   ];
             var modUnit2 = function(unit)
             {
-                mods.push(
+              mods.push(
                 {
                     file: unit,
                     path: 'construction_demand.energy',
                     //op: "add",
                     //value: 10000.0
                     op: 'multiply',
-                    value: 10.0
-                });
-                mods.push(
+                    value: 100.0
+                },
                 {
                     file: unit,
                     path: 'construction_demand.metal',
                     //op: "add",
                     //value: 100.0
                     op: 'multiply',
-                    value: 10.0
-                });
+                    value: 100.0
+                },
+                {
+                  file: unit,
+                  path: "yaw_rate",
+                  op: "multiply",
+                  value: 2
+                },
+                {
+                  file: unit,
+                  path: "pitch_rate",
+                  op: "multiply",
+                  value: 2
+                },
+                {
+                  file: unit,
+                  path: "pitch_range",
+                  op: "multiply",
+                  value: 4
+                },
+                {
+                  file: unit,
+                  path: "yaw_range",
+                  op: "multiply",
+                  value: 2
+                },
+                {
+                  file: unit,
+                  path: "max_range",
+                  op: "multiply",
+                  value: 100
+                },
+                {
+                  file: unit,
+                  path: "assist_layers",
+                  op: "replace",
+                  value: ["WL_AnyLayer"]
+                },
+                {
+                  file: unit,
+                  path: "reclaim_layers",
+                  op: "replace",
+                  value: ["WL_AnyLayer"]
+                }
+              );
             };
             _.forEach(buildArms, modUnit2);
           //
@@ -274,14 +274,14 @@ define([
                     file: unit,
                     path: 'production.energy',
                     op: 'multiply',
-                    value: 50.0
+                    value: 100.0
                 });
                 mods.push(
                 {
                     file: unit,
                     path: 'production.metal',
                     op: 'multiply',
-                    value: 50.0
+                    value: 100.0
                 });
             };
             _.forEach(units, modUnit);
