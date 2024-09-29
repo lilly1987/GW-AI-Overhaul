@@ -592,15 +592,9 @@ function gwoCard() {
         };
 
         const setupGeneralCommander = function () {
-          const cards = inventory.cards();
-          if (
-            cards.length === 1 &&
-            //cards[0].id === "gwc_start_subcdr" &&
-            !cards[0].minions
-            //true
-          ) {
-            const ai = gwoSettings && gwoSettings.ai;
-            _.times(2, function () {
+          const cards = inventory.cards();         
+          
+          const fm=function () {
               const subcommander = _.cloneDeep(
                 _.sample(GWFactions[playerFaction].minions)
               );
@@ -619,7 +613,19 @@ function gwoCard() {
                 minion: subcommander,
                 unique: Math.random(),
               });
-            });
+            }
+          if (
+            cards.length === 1 &&
+            //cards[0].id === "gwc_start_subcdr" &&
+            !cards[0].minions
+            //true
+          ) {
+            const ai = gwoSettings && gwoSettings.ai;
+            if (cards[0].id === "gwc_start_subcdr"){
+                _.times(3,fm );
+            } else {
+                _.times(1,fm );
+            }
             inventory.applyCards();
             gwoSave(game, false);
           }

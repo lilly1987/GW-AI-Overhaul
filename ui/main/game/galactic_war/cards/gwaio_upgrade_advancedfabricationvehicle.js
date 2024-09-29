@@ -6,7 +6,7 @@ define([
     visible: _.constant(true),
     describe: _.constant(
       loc(
-        "!LOC:Advanced Fabrication Vehicle Upgrade Tech increases the build range of the advanced vehicle fabricator by 150%."
+        "!LOC:첨단 자동차 제작 업그레이드 기술은 첨단 자동차 제작자의 제작 범위를 150% 증가시킵니다."
       ) +
         "<br> <br>" +
         loc("!LOC:Does not use a Data Bank.")

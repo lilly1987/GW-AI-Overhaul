@@ -5,7 +5,7 @@ define([
   return {
     visible: _.constant(true),
     describe: _.constant(
-      "!LOC:Anti-Structure Ammo Tech doubles all damage you deal to structures but halves damage to mobile units excluding commanders."
+      "!LOC:구조물 방어 탄약 기술은 구조물에 입히는 모든 피해를 두 배로 늘리지만, 지휘관을 제외한 이동형 유닛에 입히는 피해는 절반으로 줄입니다."
     ),
     summarize: _.constant("!LOC:Anti-Structure Ammo Tech"),
     icon: _.constant(

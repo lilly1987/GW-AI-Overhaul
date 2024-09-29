@@ -6,7 +6,7 @@ define([
     visible: _.constant(true),
     describe: _.constant(
       loc(
-        "!LOC:Advanced Fabrication Bot Upgrade Tech equips the advanced fabricator with the support commander's weapon."
+        "!LOC:고급 제작 로봇 업그레이드 기술은 고급 제작자에 지원 사령관의 무기를 장착해줍니다."
       ) +
         "<br> <br>" +
         loc("!LOC:Does not use a Data Bank.")
