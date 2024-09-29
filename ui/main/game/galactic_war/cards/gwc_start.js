@@ -59,6 +59,12 @@ define([
 
           //
           const mods = [
+            //{
+            //  file: gwoUnit.colonel,
+            //  path: "max_health",
+            //  op: "multiply",
+            //  value: 10,
+            //},
             {
               file: gwoUnit.commander,
               path: "navigation.move_speed",
@@ -91,57 +97,45 @@ define([
             },
             {
               file: gwoUnit.commander,
-              path: "production.energy",
-              op: "multiply",
-              value: 10,
-            },
-            {
-              file: gwoUnit.commander,
-              path: "production.metal",
-              op: "multiply",
-              value: 10,
-            },
-            {
-              file: gwoUnit.commander,
               path: "storage.energy",
               op: "multiply",
-              value: 10,
+              value: 2,
             },
             {
               file: gwoUnit.commander,
               path: "storage.metal",
               op: "multiply",
-              value: 10,
+              value: 2,
             },
             {
-              file: gwoUnit.colonel,
-              path: "max_health",
+              file: gwoUnit.commanderBuildArm,
+              path: "yaw_rate",
               op: "multiply",
-              value: 10,
+              value: 2,
+            },
+            {
+              file: gwoUnit.commanderBuildArm,
+              path: "pitch_rate",
+              op: "multiply",
+              value: 2,
             },
             {
               file: gwoUnit.commanderBuildArm,
               path: "pitch_range",
               op: "multiply",
-              value: 10,
+              value: 4,
+            },
+            {
+              file: gwoUnit.commanderBuildArm,
+              path: "yaw_range",
+              op: "multiply",
+              value: 2,
             },
             {
               file: gwoUnit.commanderBuildArm,
               path: "max_range",
               op: "multiply",
-              value: 10,
-            },
-            {
-              file: gwoUnit.commanderBuildArm,
-              path: "construction_demand.energy",
-              op: "multiply",
-              value: 10,
-            },
-            {
-              file: gwoUnit.commanderBuildArm,
-              path: "construction_demand.metal",
-              op: "multiply",
-              value: 10,
+              value: 100,
             },
             {
               file: gwoUnit.commanderBuildArm,
@@ -155,6 +149,30 @@ define([
               op: "replace",
               value: ["WL_AnyLayer"],
             },
+            {
+              file: gwoUnit.commanderBuildArm,
+              path: "construction_demand.energy",
+              op: "multiply",
+              value: 2,
+            },
+            {
+              file: gwoUnit.commanderBuildArm,
+              path: "construction_demand.metal",
+              op: "multiply",
+              value: 2,
+            },
+            //{
+            //  file: gwoUnit.commander,
+            //  path: "production.energy",
+            //  op: "multiply",
+            //  value: 2,
+            //},
+            //{
+            //  file: gwoUnit.commander,
+            //  path: "production.metal",
+            //  op: "multiply",
+            //  value: 2,
+            //},
           ];
           const weapons = [gwoUnit.commanderSecondary, gwoUnit.commanderWeapon];
           _.forEach(weapons, function (weapon) {
@@ -188,6 +206,7 @@ define([
           //
             var units =
             [
+                gwoUnit.commander,
                 '/pa/units/land/energy_plant/energy_plant.json',
                 '/pa/units/land/energy_plant_adv/energy_plant_adv.json',
                 '/pa/units/land/metal_extractor/metal_extractor.json',
