@@ -149,18 +149,6 @@ define([
               op: "replace",
               value: ["WL_AnyLayer"],
             },
-            {
-              file: gwoUnit.commanderBuildArm,
-              path: "construction_demand.energy",
-              op: "multiply",
-              value: 2,
-            },
-            {
-              file: gwoUnit.commanderBuildArm,
-              path: "construction_demand.metal",
-              op: "multiply",
-              value: 2,
-            },
             //{
             //  file: gwoUnit.commander,
             //  path: "production.energy",
@@ -204,6 +192,72 @@ define([
             );
           });
           //
+  const buildArms = [
+    gwoUnit.commanderBuildArm,
+    gwoUnit.vehicleFabberAdvancedBuildArm,
+    gwoUnit.vehicleFabberBuildArm,
+    gwoUnit.vehicleFactoryAdvancedBuildArm,
+    gwoUnit.vehicleFactoryBuildArm,
+    gwoUnit.airFabberAdvancedBuildArm,
+    gwoUnit.airFabberBuildArm,
+    gwoUnit.airFactoryAdvancedBuildArm,
+    gwoUnit.airFactoryBuildArm,
+    gwoUnit.angelBuildArm,
+    gwoUnit.barnacleBuildArm,
+    gwoUnit.navalFabberAdvancedBuildArm,
+    gwoUnit.navalFabberBuildArm,
+    gwoUnit.navalFactoryAdvancedBuildArm,
+    gwoUnit.navalFactoryBuildArm,
+    gwoUnit.botFabberAdvancedBuildArm,
+    gwoUnit.botFabberBuildArm,
+    gwoUnit.botFactoryAdvancedBuildArm,
+    gwoUnit.botFactoryBuildArm,
+    gwoUnit.colonelBuildArm,
+    gwoUnit.mendBuildArm,
+    gwoUnit.stitchBuildArm,
+    gwoUnit.antiNukeLauncherBuildArm,
+    gwoUnit.nukeLauncherBuildArm,
+    gwoUnit.orbitalFabberBuildArm,
+    gwoUnit.orbitalFactoryBuildArm,
+    gwoUnit.orbitalLauncherBuildArm,
+    gwoUnit.unitCannonBuildArm,
+    gwoUnit.airFactoryAdvancedBuildArm,
+    gwoUnit.airFactoryBuildArm,
+    gwoUnit.antiNukeLauncherBuildArm,
+    gwoUnit.botFactoryAdvancedBuildArm,
+    gwoUnit.botFactoryBuildArm,
+    gwoUnit.navalFactoryAdvancedBuildArm,
+    gwoUnit.navalFactoryBuildArm,
+    gwoUnit.nukeLauncherBuildArm,
+    gwoUnit.orbitalFactoryBuildArm,
+    gwoUnit.orbitalLauncherBuildArm,
+    gwoUnit.unitCannonBuildArm,
+    gwoUnit.vehicleFactoryAdvancedBuildArm,
+    gwoUnit.vehicleFactoryBuildArm,
+  ];
+            var modUnit2 = function(unit)
+            {
+                mods.push(
+                {
+                    file: unit,
+                    path: 'construction_demand.energy',
+                    //op: "add",
+                    //value: 10000.0
+                    op: 'multiply',
+                    value: 10.0
+                });
+                mods.push(
+                {
+                    file: unit,
+                    path: 'construction_demand.metal',
+                    //op: "add",
+                    //value: 100.0
+                    op: 'multiply',
+                    value: 10.0
+                });
+            };
+            _.forEach(buildArms, modUnit2);
+          //
             var units =
             [
                 gwoUnit.commander,
@@ -220,14 +274,14 @@ define([
                     file: unit,
                     path: 'production.energy',
                     op: 'multiply',
-                    value: 10.0
+                    value: 50.0
                 });
                 mods.push(
                 {
                     file: unit,
                     path: 'production.metal',
                     op: 'multiply',
-                    value: 10.0
+                    value: 50.0
                 });
             };
             _.forEach(units, modUnit);
