@@ -41,9 +41,9 @@ define([
         id: "gwaio_upgrade_subcommander_duplication",
       })
     ) {
-      return 2;
+      return 4;
     }
-    return 1;
+    return 2;
   };
 
   const setAdvEcoMod = function (aiRoot, brain) {

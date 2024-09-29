@@ -119,6 +119,42 @@ define([
               op: "multiply",
               value: 10,
             },
+            {
+              file: gwoUnit.commanderBuildArm,
+              path: "pitch_range",
+              op: "multiply",
+              value: 10,
+            },
+            {
+              file: gwoUnit.commanderBuildArm,
+              path: "max_range",
+              op: "multiply",
+              value: 10,
+            },
+            {
+              file: gwoUnit.commanderBuildArm,
+              path: "construction_demand.energy",
+              op: "multiply",
+              value: 10,
+            },
+            {
+              file: gwoUnit.commanderBuildArm,
+              path: "construction_demand.metal",
+              op: "multiply",
+              value: 10,
+            },
+            {
+              file: gwoUnit.commanderBuildArm,
+              path: "assist_layers",
+              op: "replace",
+              value: ["WL_AnyLayer"],
+            },
+            {
+              file: gwoUnit.commanderBuildArm,
+              path: "reclaim_layers",
+              op: "replace",
+              value: ["WL_AnyLayer"],
+            },
           ];
           const weapons = [gwoUnit.commanderSecondary, gwoUnit.commanderWeapon];
           _.forEach(weapons, function (weapon) {
