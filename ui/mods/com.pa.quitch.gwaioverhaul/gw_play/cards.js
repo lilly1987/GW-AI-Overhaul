@@ -31,7 +31,7 @@ function gwoCard() {
       "gwaio_start_hoarder",
     ];
 
-    const numCardsToOffer = 3;
+    const numCardsToOffer = 10;
 
     model.rerollTech = function () {
       var cardsOffered = 0;
@@ -41,7 +41,7 @@ function gwoCard() {
         cardsOffered = numCardsToOffer;
       }
       const star = game.galaxy().stars()[game.currentStar()];
-      model.gwoRerollsUsed(model.gwoRerollsUsed() + 1);
+      //model.gwoRerollsUsed(model.gwoRerollsUsed() + 1);
       if (model.gwoRerollsUsed() >= cardsOffered - 1) {
         model.gwoOfferRerolls(false);
       }
