@@ -193,7 +193,7 @@ define([
     gwoUnit.vehicleFactoryAdvancedBuildArm,
     gwoUnit.vehicleFactoryBuildArm,
   ];
-            var mult=25.0
+            var mult=10.0
             var modUnit2 = function(unit)
             {
               mods.push(

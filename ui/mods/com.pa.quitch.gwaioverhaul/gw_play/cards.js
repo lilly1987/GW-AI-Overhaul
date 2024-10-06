@@ -31,7 +31,7 @@ function gwoCard() {
       "gwaio_start_hoarder",
     ];
 
-    const numCardsToOffer = 10;
+    const numCardsToOffer = 8;
 
     model.rerollTech = function () {
       var cardsOffered = 0;
